@@ -675,517 +675,397 @@
        D D D D | F F F F F F F F
     */
 
-    .media-wall {
-      display: grid;
+/* =========================================================
+   MEDIA WALL — 10 КОНТЕЙНЕРОВ
+   =========================================================
 
-      grid-template-columns:
-        repeat(
-          12,
-          minmax(0, 1fr)
-        );
+   Сетка повторяет композицию референса.
 
-      grid-template-rows:
-        repeat(8, 88px);
+   24 колонки позволяют довольно точно контролировать
+   пропорции отдельных блоков.
 
-      gap: 16px;
+   Общая aspect-ratio фиксирует пропорции всей композиции,
+   поэтому при изменении ширины layout не разваливается.
+*/
 
-      align-items: stretch;
-    }
+.media-wall {
+  display: grid;
 
-    .media-frame {
-      position: relative;
+  grid-template-columns:
+    repeat(24, minmax(0, 1fr));
 
-      margin: 0;
-
-      overflow: hidden;
+  /*
+    Пять горизонтальных зон.
 
-      border:
-        1px solid var(--line);
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(201, 255, 63, 0.16),
-          transparent 42%
-        ),
-        linear-gradient(
-          315deg,
-          rgba(69, 240, 255, 0.12),
-          transparent 38%
-        ),
-        var(--bg-panel);
+    Пропорции подобраны по референсу:
+    1 — большой верхний ряд
+    2 — средний верхний ряд
+    3 — узкая горизонтальная полоса
+    4–5 — нижний блок
+  */
+  grid-template-rows:
+    334fr
+    251fr
+    137fr
+    153fr
+    153fr;
 
-      box-shadow:
-        0 18px 60px
-        rgba(0, 0, 0, 0.18);
-    }
-
-    .media-frame::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 12px;
-
-      border:
-        1px solid
-        rgba(230, 235, 231, 0.08);
-
-      border-radius:
-        calc(
-          var(--radius-md) - 8px
-        );
+  gap: 16px;
 
-      pointer-events: none;
-
-      z-index: 2;
-    }
+  width: 100%;
 
-    .media-frame img,
-    .media-frame video {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
+  /*
+    Пропорция всей media wall.
+    Можно немного менять, если захочется
+    сделать галерею выше или компактнее.
+  */
+  aspect-ratio: 976 / 1092;
+}
 
-      transition:
-        transform 420ms ease,
-        opacity 420ms ease,
-        filter 420ms ease;
-    }
 
-    .media-frame:hover img,
-    .media-frame:hover video {
-      transform:
-        scale(1.035);
+/* =========================================================
+   ОБЩИЙ СТИЛЬ КОНТЕЙНЕРОВ
+   ========================================================= */
 
-      opacity: 0.72;
+.media-frame {
+  position: relative;
 
-      filter:
-        grayscale(0.4)
-        brightness(0.78);
-    }
+  min-width: 0;
+  min-height: 0;
 
-    /* =========================================================
-       ПОЗИЦИИ ПЛИТОК
-       ========================================================= */
+  margin: 0;
 
-    .media-a {
-      grid-column: 1 / 9;
-      grid-row: 1 / 5;
-    }
+  overflow: hidden;
 
-    .media-b {
-      grid-column: 9 / 13;
-      grid-row: 1 / 3;
-    }
+  border:
+    1px solid var(--line);
 
-    .media-c {
-      grid-column: 9 / 13;
-      grid-row: 3 / 5;
-    }
+  border-radius:
+    var(--radius-md);
 
-    .media-d {
-      grid-column: 1 / 5;
-      grid-row: 5 / 9;
-    }
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201, 255, 63, 0.12),
+      transparent 42%
+    ),
+    linear-gradient(
+      315deg,
+      rgba(69, 240, 255, 0.1),
+      transparent 38%
+    ),
+    var(--bg-panel);
+}
 
-    .media-e {
-      grid-column: 5 / 13;
-      grid-row: 5 / 7;
-    }
 
-    .media-f {
-      grid-column: 5 / 13;
-      grid-row: 7 / 9;
-    }
+/* Убираем внутреннюю декоративную рамку,
+   если хочется более чистого вида как на референсе */
 
-    /* =========================================================
-       ПЛЕЙСХОЛДЕРЫ
-       ========================================================= */
+.media-frame::before {
+  display: none;
+}
 
-    .media-placeholder {
-      width: 100%;
-      height: 100%;
 
-      display: grid;
+/* =========================================================
+   ИЗОБРАЖЕНИЯ / VIDEO
+   ========================================================= */
 
-      place-items: center;
+.media-frame img,
+.media-frame video {
+  width: 100%;
+  height: 100%;
 
-      color:
-        rgba(
-          230,
-          235,
-          231,
-          0.44
-        );
+  object-fit: cover;
 
-      font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        monospace;
+  transition:
+    transform 420ms ease,
+    filter 420ms ease;
+}
 
-      font-size: 12px;
 
-      text-transform: uppercase;
+.media-frame:hover img,
+.media-frame:hover video {
+  transform: scale(1.025);
 
-      letter-spacing: 0.12em;
-    }
+  filter:
+    brightness(0.65);
+}
 
-    /* =========================================================
-       ОПИСАНИЕ ПРИ HOVER
-       ========================================================= */
 
-    .media-caption {
-      position: absolute;
+/* =========================================================
+   РАСПОЛОЖЕНИЕ 10 ПЛИТОК
+   ========================================================= */
 
-      inset:
-        auto
-        16px
-        16px
-        16px;
 
-      z-index: 3;
+/* 01 — большой верхний горизонтальный */
 
-      padding: 16px;
+.media-01 {
+  grid-column: 1 / 17;
+  grid-row: 1 / 2;
+}
 
-      border:
-        1px solid
-        rgba(230, 235, 231, 0.12);
 
-      border-radius: 16px;
+/* 02 — верхний правый */
 
-      background:
-        rgba(13, 15, 15, 0.72);
+.media-02 {
+  grid-column: 17 / 25;
+  grid-row: 1 / 2;
+}
 
-      backdrop-filter:
-        blur(14px);
 
-      opacity: 0;
+/* 03 — высокий вертикальный слева */
 
-      transform:
-        translateY(10px);
+.media-03 {
+  grid-column: 1 / 9;
+  grid-row: 2 / 4;
+}
 
-      transition:
-        opacity 220ms ease,
-        transform 220ms ease;
-    }
 
-    .media-frame:hover
-    .media-caption {
-      opacity: 1;
+/* 04 — центральный блок */
 
-      transform:
-        translateY(0);
-    }
+.media-04 {
+  grid-column: 9 / 18;
+  grid-row: 2 / 3;
+}
 
-    .media-caption span {
-      display: block;
 
-      color: var(--acid);
+/* 05 — правый блок */
 
-      font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        monospace;
+.media-05 {
+  grid-column: 18 / 25;
+  grid-row: 2 / 3;
+}
 
-      font-size: 11px;
 
-      text-transform: uppercase;
+/* 06 — длинная узкая полоса */
 
-      letter-spacing: 0.12em;
+.media-06 {
+  grid-column: 9 / 25;
+  grid-row: 3 / 4;
+}
 
-      margin-bottom: 6px;
-    }
 
-    .media-caption p {
-      color: var(--text);
+/* 07 — нижний левый, верхний */
 
-      margin-bottom: 0;
+.media-07 {
+  grid-column: 1 / 9;
+  grid-row: 4 / 5;
+}
 
-      font-size: 14px;
-    }
 
-    /* =========================================================
-       ОПИСАНИЕ КЕЙСА
-       ========================================================= */
+/* 08 — нижний левый, нижний */
 
-    .case-summary {
-      display: grid;
+.media-08 {
+  grid-column: 1 / 9;
+  grid-row: 5 / 6;
+}
 
-      grid-template-columns:
-        minmax(0, 0.8fr)
-        minmax(0, 1.2fr);
 
-      gap: 18px;
-    }
+/* 09 — большой нижний центральный */
 
-    .summary-card {
-      border:
-        1px solid var(--line);
+.media-09 {
+  grid-column: 9 / 21;
+  grid-row: 4 / 6;
+}
 
-      border-radius:
-        var(--radius-md);
 
-      background:
-        rgba(255, 255, 255, 0.035);
+/* 10 — узкий вертикальный справа */
 
-      padding: 24px;
-    }
+.media-10 {
+  grid-column: 21 / 25;
+  grid-row: 4 / 6;
+}
 
-    .summary-card h3 {
-      font-size: 20px;
 
-      letter-spacing: -0.03em;
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
 
-      margin-bottom: 12px;
-    }
+.media-placeholder {
+  width: 100%;
+  height: 100%;
 
-    .summary-card p {
-      color: var(--muted);
+  display: grid;
+  place-items: center;
 
-      margin-bottom: 0;
-    }
+  color:
+    rgba(230, 235, 231, 0.4);
 
-    /* =========================================================
-       НИЖНЯЯ НАВИГАЦИЯ
-       ========================================================= */
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
 
-    .case-nav-panel {
-      border:
-        1px solid var(--line);
+  font-size: 12px;
 
-      border-radius:
-        var(--radius-lg);
+  text-transform: uppercase;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(201, 255, 63, 0.12),
-          transparent 36%
-        ),
-        rgba(255, 255, 255, 0.04);
+  letter-spacing: 0.12em;
+}
 
-      padding:
-        clamp(
-          24px,
-          4vw,
-          42px
-        );
 
-      display: grid;
+/* =========================================================
+   ОПИСАНИЕ ПРИ НАВЕДЕНИИ
+   ========================================================= */
 
-      grid-template-columns:
-        repeat(
-          2,
-          minmax(0, 1fr)
-        );
+.media-caption {
+  position: absolute;
 
-      gap: 18px;
-    }
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
 
-    .case-nav-link {
-      border:
-        1px solid var(--line);
+  z-index: 3;
 
-      border-radius:
-        var(--radius-md);
+  padding: 14px 16px;
 
-      padding: 18px;
+  border:
+    1px solid
+    rgba(230, 235, 231, 0.12);
 
-      color: var(--muted);
+  border-radius: 14px;
 
-      transition:
-        transform 180ms ease,
-        border-color 180ms ease,
-        background 180ms ease;
-    }
+  background:
+    rgba(13, 15, 15, 0.82);
 
-    .case-nav-link:hover {
-      transform:
-        translateY(-2px);
+  backdrop-filter:
+    blur(14px);
 
-      border-color:
-        rgba(
-          201,
-          255,
-          63,
-          0.42
-        );
+  opacity: 0;
 
-      background:
-        rgba(
-          201,
-          255,
-          63,
-          0.04
-        );
-    }
+  transform:
+    translateY(8px);
 
-    .case-nav-link span {
-      display: block;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
 
-      color: var(--orange);
 
-      font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        monospace;
+.media-frame:hover
+.media-caption {
+  opacity: 1;
 
-      font-size: 12px;
+  transform:
+    translateY(0);
+}
 
-      text-transform: uppercase;
 
-      letter-spacing: 0.12em;
+.media-caption span {
+  display: block;
 
-      margin-bottom: 8px;
-    }
+  margin-bottom: 5px;
 
-    .case-nav-link strong {
-      color: var(--text);
+  color: var(--acid);
 
-      font-size: 20px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
 
-      letter-spacing: -0.03em;
-    }
+  font-size: 11px;
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
+  text-transform: uppercase;
 
-    footer {
-      padding: 28px 0;
+  letter-spacing: 0.12em;
+}
 
-      color: var(--muted);
 
-      font-size: 13px;
+.media-caption p {
+  margin: 0;
 
-      border-top:
-        1px solid var(--line);
-    }
+  color: var(--text);
 
-    /* =========================================================
-       ПЛАНШЕТ
-       ========================================================= */
+  font-size: 14px;
+}
 
-    @media (max-width: 900px) {
 
-      .case-hero-layout,
-      .section-head,
-      .case-summary,
-      .case-nav-panel {
-        grid-template-columns:
-          minmax(0, 1fr);
-      }
+/* =========================================================
+   ПЛАНШЕТ
+   ========================================================= */
 
-      .case-meta-grid {
-        grid-template-columns:
-          minmax(0, 1fr);
-      }
+@media (max-width: 900px) {
 
-      .case-hero-card {
-        min-height: 420px;
-      }
+  /*
+    До мобильного сохраняем ту же композицию.
+    Она просто пропорционально уменьшается.
+  */
 
-      .media-wall {
-        grid-template-columns:
-          repeat(
-            6,
-            minmax(0, 1fr)
-          );
+  .media-wall {
+    gap: 12px;
+  }
 
-        grid-template-rows:
-          repeat(13, 78px);
-      }
+}
 
-      .media-a {
-        grid-column: 1 / 7;
-        grid-row: 1 / 5;
-      }
 
-      .media-b {
-        grid-column: 1 / 4;
-        grid-row: 5 / 7;
-      }
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================= */
 
-      .media-c {
-        grid-column: 4 / 7;
-        grid-row: 5 / 7;
-      }
+@media (max-width: 640px) {
 
-      .media-d {
-        grid-column: 1 / 7;
-        grid-row: 7 / 10;
-      }
+  /*
+    На телефоне сложная мозаика уже становится слишком мелкой,
+    поэтому превращаем её в обычную ленту.
+  */
 
-      .media-e {
-        grid-column: 1 / 7;
-        grid-row: 10 / 12;
-      }
+  .media-wall {
+    display: grid;
 
-      .media-f {
-        grid-column: 1 / 7;
-        grid-row: 12 / 14;
-      }
-    }
+    grid-template-columns:
+      minmax(0, 1fr);
 
-    /* =========================================================
-       МОБИЛЬНАЯ ВЕРСИЯ
-       ========================================================= */
+    grid-template-rows: none;
 
-    @media (max-width: 640px) {
+    aspect-ratio: auto;
 
-      .nav-links {
-        display: none;
-      }
+    gap: 12px;
+  }
 
-      .case-hero {
-        padding-top: 64px;
-      }
 
-      .case-cover {
-        width: 132px;
-        height: 132px;
-      }
+  .media-01,
+  .media-02,
+  .media-03,
+  .media-04,
+  .media-05,
+  .media-06,
+  .media-07,
+  .media-08,
+  .media-09,
+  .media-10 {
+    grid-column: auto;
+    grid-row: auto;
+  }
 
-      .case-arrow-marker {
-        width: 104px;
-        height: 104px;
 
-        font-size: 36px;
-      }
+  .media-frame {
+    aspect-ratio: 4 / 3;
+  }
 
-      .media-wall {
-        grid-template-columns:
-          minmax(0, 1fr);
 
-        grid-template-rows:
-          none;
-      }
+  /*
+    Вертикальные фотографии оставляем более высокими.
+  */
 
-      .media-a,
-      .media-b,
-      .media-c,
-      .media-d,
-      .media-e,
-      .media-f {
-        grid-column: auto;
-        grid-row: auto;
-      }
+  .media-03,
+  .media-10 {
+    aspect-ratio: 3 / 4;
+  }
 
-      .media-frame {
-        aspect-ratio: 4 / 3;
-      }
-    }
+
+  /*
+    Узкие горизонтальные блоки.
+  */
+
+  .media-06 {
+    aspect-ratio: 16 / 5;
+  }
+
+}
 
   </style>
 </head>
@@ -1471,210 +1351,319 @@
 
         <div class="media-wall">
 
-          <!-- ===================================================
-               A — БОЛЬШОЙ ГЛАВНЫЙ БЛОК
-               =================================================== -->
+  <!-- =====================================================
+       01 — БОЛЬШОЙ ГЛАВНЫЙ ВИЗУАЛ
+       ===================================================== -->
 
-          <figure class="media-frame media-a">
-              <img
-              src="case-1-assets/wn-summit-main-visual.png"
-              alt="Главный визуал проекта"
-            />
+  <figure class="media-frame media-01">
 
-            <div class="media-placeholder">
-              Main Visual
-            </div>
+    <div class="media-placeholder">
+      01 / Main Visual
+    </div>
 
-            <figcaption class="media-caption">
+    <figcaption class="media-caption">
 
-              <span>
-                Main visual
-              </span>
+      <span>
+        Main Visual
+      </span>
 
-              <p>
-                Главный визуал проекта:
-                основная композиция,
-                цвет и графический принцип.
-              </p>
+      <p>
+        Основной визуал события.
+      </p>
 
-            </figcaption>
+    </figcaption>
 
-          </figure>
+  </figure>
 
-          <!-- ===================================================
-               B
-               =================================================== -->
 
-          <figure class="media-frame media-b">
+  <!-- =====================================================
+       02 — ВЕРХНИЙ ПРАВЫЙ
+       ===================================================== -->
 
-            <!--
-            <img
-              src="../assets/cases/project-01/banner-system.jpg"
-              alt="Система баннеров"
-            />
-            -->
+  <figure class="media-frame media-02">
 
-            <div class="media-placeholder">
-              Wide Asset
-            </div>
+    <!--
+    <img
+      src="../assets/cases/project-01/02.jpg"
+      alt="Материалы на площадке"
+    />
+    -->
 
-            <figcaption class="media-caption">
+    <div class="media-placeholder">
+      02 / Event
+    </div>
 
-              <span>
-                Banner System
-              </span>
+    <figcaption class="media-caption">
 
-              <p>
-                Адаптация визуального языка
-                под горизонтальные
-                digital-форматы.
-              </p>
+      <span>
+        Event Graphics
+      </span>
 
-            </figcaption>
+      <p>
+        Графика в пространстве события.
+      </p>
 
-          </figure>
+    </figcaption>
 
-          <!-- ===================================================
-               C
-               =================================================== -->
+  </figure>
 
-          <figure class="media-frame media-c">
 
-            <!--
-            <img
-              src="../assets/cases/project-01/social.jpg"
-              alt="Шаблоны для социальных сетей"
-            />
-            -->
+  <!-- =====================================================
+       03 — ВЫСОКИЙ ЛЕВЫЙ
+       ===================================================== -->
 
-            <div class="media-placeholder">
-              Social
-            </div>
+  <figure class="media-frame media-03">
 
-            <figcaption class="media-caption">
+    <!--
+    <img
+      src="../assets/cases/project-01/03.jpg"
+      alt="Навигация и программа"
+    />
+    -->
 
-              <span>
-                Social Templates
-              </span>
+    <div class="media-placeholder">
+      03 / Navigation
+    </div>
 
-              <p>
-                Серия шаблонов
-                для постов,
-                сторис
-                и промо-анонсов.
-              </p>
+    <figcaption class="media-caption">
 
-            </figcaption>
+      <span>
+        Program
+      </span>
 
-          </figure>
+      <p>
+        Программа и навигация на площадке.
+      </p>
 
-          <!-- ===================================================
-               D
-               =================================================== -->
+    </figcaption>
 
-          <figure class="media-frame media-d">
+  </figure>
 
-            <!--
-            <img
-              src="../assets/cases/project-01/poster.jpg"
-              alt="Постер проекта"
-            />
-            -->
 
-            <div class="media-placeholder">
-              Poster
-            </div>
+  <!-- =====================================================
+       04
+       ===================================================== -->
 
-            <figcaption class="media-caption">
+  <figure class="media-frame media-04">
 
-              <span>
-                Vertical Poster
-              </span>
+    <!--
+    <img
+      src="../assets/cases/project-01/04.jpg"
+      alt="Digital коммуникация"
+    />
+    -->
 
-              <p>
-                Вертикальная версия
-                ключевого макета
-                для печати
-                и digital-размещений.
-              </p>
+    <div class="media-placeholder">
+      04 / Digital
+    </div>
 
-            </figcaption>
+    <figcaption class="media-caption">
 
-          </figure>
+      <span>
+        Digital
+      </span>
 
-          <!-- ===================================================
-               E
-               =================================================== -->
+      <p>
+        Адаптации для online-коммуникации.
+      </p>
 
-          <figure class="media-frame media-e">
+    </figcaption>
 
-            <!--
-            <img
-              src="../assets/cases/project-01/detail.jpg"
-              alt="Типографика проекта"
-            />
-            -->
+  </figure>
 
-            <div class="media-placeholder">
-              Detail
-            </div>
 
-            <figcaption class="media-caption">
+  <!-- =====================================================
+       05
+       ===================================================== -->
 
-              <span>
-                Typography
-              </span>
+  <figure class="media-frame media-05">
 
-              <p>
-                Фрагмент типографики,
-                микрографики
-                и элементов системы.
-              </p>
+    <!--
+    <img
+      src="../assets/cases/project-01/05.jpg"
+      alt="Социальные сети"
+    />
+    -->
 
-            </figcaption>
+    <div class="media-placeholder">
+      05 / Social
+    </div>
 
-          </figure>
+    <figcaption class="media-caption">
 
-          <!-- ===================================================
-               F — МОЖНО ИСПОЛЬЗОВАТЬ ПОД VIDEO
-               =================================================== -->
+      <span>
+        Social
+      </span>
 
-          <figure class="media-frame media-f">
+      <p>
+        Материалы для социальных сетей.
+      </p>
 
-            <!--
-            <video
-              src="../assets/cases/project-01/motion-preview.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-            ></video>
-            -->
+    </figcaption>
 
-            <div class="media-placeholder">
-              Motion
-            </div>
+  </figure>
 
-            <figcaption class="media-caption">
 
-              <span>
-                Motion Preview
-              </span>
+  <!-- =====================================================
+       06 — ДЛИННАЯ ГОРИЗОНТАЛЬНАЯ ПОЛОСА
+       ===================================================== -->
 
-              <p>
-                Здесь можно разместить
-                короткую анимацию,
-                motion-превью
-                или видео.
-              </p>
+  <figure class="media-frame media-06">
 
-            </figcaption>
+    <!--
+    <img
+      src="../assets/cases/project-01/06.jpg"
+      alt="Медиа и публикации"
+    />
+    -->
 
-          </figure>
+    <div class="media-placeholder">
+      06 / Media
+    </div>
 
-        </div>
+    <figcaption class="media-caption">
 
-      </div>
+      <span>
+        Media
+      </span>
+
+      <p>
+        Материалы для публикаций и анонсов.
+      </p>
+
+    </figcaption>
+
+  </figure>
+
+
+  <!-- =====================================================
+       07
+       ===================================================== -->
+
+  <figure class="media-frame media-07">
+
+    <!--
+    <img
+      src="../assets/cases/project-01/07.jpg"
+      alt="Web материалы"
+    />
+    -->
+
+    <div class="media-placeholder">
+      07 / Web
+    </div>
+
+    <figcaption class="media-caption">
+
+      <span>
+        Web
+      </span>
+
+      <p>
+        Визуальная адаптация для сайта события.
+      </p>
+
+    </figcaption>
+
+  </figure>
+
+
+  <!-- =====================================================
+       08
+       ===================================================== -->
+
+  <figure class="media-frame media-08">
+
+    <!--
+    <img
+      src="../assets/cases/project-01/08.jpg"
+      alt="Детали айдентики"
+    />
+    -->
+
+    <div class="media-placeholder">
+      08 / Details
+    </div>
+
+    <figcaption class="media-caption">
+
+      <span>
+        Details
+      </span>
+
+      <p>
+        Типографика и детали визуальной системы.
+      </p>
+
+    </figcaption>
+
+  </figure>
+
+
+  <!-- =====================================================
+       09 — БОЛЬШОЕ ФОТО ВНИЗУ
+       ===================================================== -->
+
+  <figure class="media-frame media-09">
+
+    <!--
+    <img
+      src="../assets/cases/project-01/09.jpg"
+      alt="Событие"
+    />
+    -->
+
+    <div class="media-placeholder">
+      09 / Event Photo
+    </div>
+
+    <figcaption class="media-caption">
+
+      <span>
+        Event
+      </span>
+
+      <p>
+        Визуальная система в реальном пространстве.
+      </p>
+
+    </figcaption>
+
+  </figure>
+
+
+  <!-- =====================================================
+       10 — УЗКИЙ ВЕРТИКАЛЬНЫЙ
+       ===================================================== -->
+
+  <figure class="media-frame media-10">
+
+    <!--
+    <img
+      src="../assets/cases/project-01/10.jpg"
+      alt="Навигационная конструкция"
+    />
+    -->
+
+    <div class="media-placeholder">
+      10 / Signage
+    </div>
+
+    <figcaption class="media-caption">
+
+      <span>
+        Signage
+      </span>
+
+      <p>
+        Навигация и оформление площадки.
+      </p>
+
+    </figcaption>
+
+  </figure>
+
+</div>
 
     </section>
 
