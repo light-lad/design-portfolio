@@ -591,6 +591,8 @@ h2,
     }
 
     .work-link {
+      font-family: inherit;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -791,6 +793,382 @@ h2,
         height: 27px;
       }
     }
+
+    /* =========================================================
+       LIGHTBOX
+       ========================================================= */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+
+      z-index: 1000;
+
+      display: grid;
+      place-items: center;
+
+      padding: 28px;
+
+      opacity: 0;
+      visibility: hidden;
+
+      pointer-events: none;
+
+      transition:
+        opacity 220ms ease,
+        visibility 220ms ease;
+    }
+
+
+    .lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+
+    /* Затемнение */
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+
+      background:
+        rgba(5, 7, 7, 0.88);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    /* Основное окно */
+
+    .lightbox-window {
+      position: relative;
+
+      z-index: 1;
+
+      width:
+        min(1380px, 100%);
+
+      max-height:
+        calc(100vh - 56px);
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-lg);
+
+      background:
+        rgba(13, 15, 15, 0.98);
+
+      box-shadow:
+        0 40px 120px
+        rgba(0, 0, 0, 0.4);
+    }
+
+
+    /* Верхняя строка */
+
+    .lightbox-top {
+      min-height: 64px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding:
+        0 22px;
+
+      border-bottom:
+        1px solid var(--line);
+    }
+
+
+    .lightbox-label {
+      color: var(--orange);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+
+      letter-spacing: 0.12em;
+    }
+
+
+    /* Close */
+
+    .lightbox-close {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 50%;
+
+      background: transparent;
+
+      color: var(--text);
+
+      font-size: 22px;
+
+      cursor: pointer;
+
+      transition:
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+    }
+
+
+    .lightbox-close:hover {
+      border-color:
+        rgba(201, 255, 63, 0.5);
+
+      color: var(--acid);
+
+      transform:
+        rotate(6deg);
+    }
+
+
+    /* =========================================================
+       LIGHTBOX CONTENT
+       ========================================================= */
+
+    .lightbox-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+      min-height:
+        min(720px, calc(100vh - 120px));
+    }
+
+
+    /* Область изображения */
+
+    .lightbox-media {
+      min-width: 0;
+
+      display: grid;
+      place-items: center;
+
+      padding:
+        clamp(20px, 4vw, 54px);
+
+      background:
+        rgba(255, 255, 255, 0.02);
+
+      overflow: hidden;
+    }
+
+
+    .lightbox-image {
+      width: 100%;
+      height: 100%;
+
+      max-height:
+        calc(100vh - 180px);
+
+      object-fit: contain;
+    }
+
+
+    /* =========================================================
+       RIGHT INFO
+       ========================================================= */
+
+    .lightbox-info {
+      padding: 28px;
+
+      border-left:
+        1px solid var(--line);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      gap: 32px;
+    }
+
+
+    .lightbox-type {
+      margin-bottom: 14px;
+
+      color: var(--acid);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+    }
+
+
+    .lightbox-title {
+      margin-bottom: 14px;
+
+      font-size:
+        clamp(24px, 2.6vw, 36px);
+
+      line-height: 1;
+
+      letter-spacing: -0.05em;
+    }
+
+
+    .lightbox-description {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    /* =========================================================
+       CONTROLS
+       ========================================================= */
+
+    .lightbox-controls {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+    }
+
+
+    .lightbox-arrow {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 50%;
+
+      background: transparent;
+
+      color: var(--text);
+
+      cursor: pointer;
+
+      transition:
+        border-color 180ms ease,
+        color 180ms ease;
+    }
+
+
+    .lightbox-arrow:hover {
+      border-color:
+        rgba(201, 255, 63, 0.5);
+
+      color: var(--acid);
+    }
+
+
+    .lightbox-counter {
+      color: var(--muted);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    /* В режиме одного изображения стрелки не нужны */
+
+    .lightbox.is-single
+    .lightbox-controls {
+      display: none;
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 760px) {
+
+      .lightbox {
+        padding: 12px;
+      }
+
+
+      .lightbox-window {
+        max-height:
+          calc(100vh - 24px);
+      }
+
+
+      .lightbox-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        overflow-y: auto;
+
+        max-height:
+          calc(100vh - 90px);
+      }
+
+
+      .lightbox-media {
+        min-height: 52vh;
+
+        padding: 18px;
+      }
+
+
+      .lightbox-info {
+        border-left: 0;
+
+        border-top:
+          1px solid var(--line);
+
+        padding: 20px;
+      }
+
+    }
+
   </style>
 </head>
 <body>
@@ -1059,11 +1437,14 @@ h2,
             <article class="card work-card">
               <div class="work-preview" data-label="Case preview">
                 <img src="assets/works/project-02.jpg" alt="Название проекта №2"
+                />
               </div>
+
               <div class="work-content">
                 <div class="work-meta">
-                  <span class="tag">Event</span>
-                  <span class="tag">Promo</span>
+                  <span class="tag">Communication</span>
+                  <span class="tag">Digital</span>
+                  <span class="tag">Corporate</span>
                 </div>
                 <h3>Название проекта №2</h3>
                 <p>
@@ -1094,46 +1475,107 @@ h2,
               </div>
             </article>
 
-            <article class="card work-card">
-              <div class="work-preview" data-label="Poster / Visual">
-                <!-- <img src="assets/works/poster-01.jpg" alt="Постер или визуальный эксперимент" /> -->
-              </div>
-              <div class="work-content">
-                <div class="work-meta">
-                  <span class="tag">Poster</span>
-                  <span class="tag">Visual</span>
-                </div>
-                <h3>Постер / визуальный фрагмент</h3>
-                <p>
-                  Отдельная сильная работа, которую можно показать без полноценного описания кейса.
-                </p>
-                <!--
-                  Если для этой работы не нужна отдельная страница, можно удалить блок ниже.
-                -->
-                <div class="work-actions">
-                  <a class="work-link" href="cases/poster-01.html">Подробнее</a>
-                </div>
-              </div>
-            </article>
+            <!-- ============================================
+                 ПРЕЗЕНТАЦИЯ
+                 Открывает popup-галерею с несколькими слайдами
+                 ============================================ -->
 
             <article class="card work-card">
-              <div class="work-preview" data-label="Identity / Fragment">
-                <!-- <img src="assets/works/identity-fragment-01.jpg" alt="Фрагмент айдентики" /> -->
+
+              <div
+                class="work-preview"
+                data-label="Presentation"
+              >
+                <img
+                  src="assets/works/presentation-01/cover.jpg"
+                  alt="Название презентации"
+                />
               </div>
+
               <div class="work-content">
+
                 <div class="work-meta">
-                  <span class="tag">Identity</span>
-                  <span class="tag">Fragment</span>
+                  <span class="tag">Presentation</span>
+                  <span class="tag">Layout</span>
                 </div>
-                <h3>Фрагмент айдентики</h3>
+
+                <h3>
+                  Презентации и инфографика
+                </h3>
+
                 <p>
-                  Логотип, типографика, цветовая система, графические элементы или часть визуального языка.
+                  Презентация для международного
+                  B2B-проекта.
                 </p>
+
                 <div class="work-actions">
-                  <a class="work-link" href="cases/identity-fragment-01.html">Подробнее</a>
+
+                  <button
+                    class="work-link lightbox-trigger"
+                    type="button"
+                    data-lightbox-type="gallery"
+                    data-gallery="presentation-01"
+                  >
+                    Смотреть
+                  </button>
+
                 </div>
+
               </div>
+
             </article>
+
+            <!-- ============================================
+                 ОТДЕЛЬНАЯ ГРАФИЧЕСКАЯ РАБОТА
+                 Открывает одно изображение крупно
+                 ============================================ -->
+
+            <article class="card work-card">
+
+              <div
+                class="work-preview"
+                data-label="Graphic"
+              >
+                <img
+                  src="assets/works/poster-01/preview.jpg"
+                  alt="Название графической работы"
+                />
+              </div>
+
+              <div class="work-content">
+
+                <div class="work-meta">
+                  <span class="tag">Poster</span>
+                  <span class="tag">Graphic</span>
+                </div>
+
+                <h3>
+                  Название работы
+                </h3>
+
+                <p>
+                  Постер / визуальный эксперимент.
+                </p>
+
+                <div class="work-actions">
+
+                  <button
+                    class="work-link lightbox-trigger"
+                    type="button"
+                    data-lightbox-type="image"
+                    data-image="assets/works/poster-01/full.jpg"
+                    data-title="Название работы"
+                    data-description="Poster / Graphic Design / 2026"
+                  >
+                    Открыть изображение крупнее
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
           </div>
         </div>
 
@@ -1179,6 +1621,8 @@ h2,
       © 2026 Георгий Рыжов. Графический дизайнер.
     </div>
   </footer>
+
+
   <script>
     /*
       ==============================
@@ -1263,7 +1707,7 @@ h2,
 
     if (worksSlider) {
       const originalCards = Array.from(worksSlider.children);
-      const autoSpeed = 0.35;
+      const autoSpeed = 0.20;
 
       let isDown = false;
       let startX = 0;
@@ -1383,5 +1827,118 @@ h2,
       }, true);
     }
   </script>
+
+  <!-- =========================================================
+       LIGHTBOX / POPUP
+       ========================================================= -->
+
+  <div
+    class="lightbox"
+    id="portfolio-lightbox"
+    aria-hidden="true"
+  >
+
+    <div class="lightbox-backdrop"></div>
+
+    <div
+      class="lightbox-window"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Просмотр работы"
+    >
+
+      <!-- Верхняя техническая панель -->
+
+      <div class="lightbox-top">
+
+        <div class="lightbox-label">
+          SELECTED WORK / VIEW
+        </div>
+
+        <button
+          class="lightbox-close"
+          type="button"
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- Основная часть -->
+
+      <div class="lightbox-layout">
+
+        <!-- Изображение / слайд -->
+
+        <div class="lightbox-media">
+
+          <img
+            class="lightbox-image"
+            src=""
+            alt=""
+          />
+
+        </div>
+
+
+        <!-- Информация справа -->
+
+        <aside class="lightbox-info">
+
+          <div>
+
+            <div class="lightbox-type">
+              Presentation
+            </div>
+
+            <h3 class="lightbox-title">
+              Название проекта
+            </h3>
+
+            <p class="lightbox-description">
+              Описание проекта.
+            </p>
+
+          </div>
+
+
+          <!-- Навигация галереи -->
+
+          <div class="lightbox-controls">
+
+            <button
+              class="lightbox-arrow lightbox-prev"
+              type="button"
+              aria-label="Предыдущий слайд"
+            >
+              ←
+            </button>
+
+            <div class="lightbox-counter">
+              <span class="lightbox-current">01</span>
+              /
+              <span class="lightbox-total">06</span>
+            </div>
+
+            <button
+              class="lightbox-arrow lightbox-next"
+              type="button"
+              aria-label="Следующий слайд"
+            >
+              →
+            </button>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </body>
 </html>
