@@ -456,6 +456,23 @@ h2,
       overflow: hidden;
     }
 
+    .service-card-ai {
+      margin-top: 18px;
+      min-height: 144px;
+    }
+
+    .service-card-ai .service-card-content,
+    .service-card-ai .service-card-content h3,
+    .service-card-ai .service-card-content p {
+      min-height: 0;
+    }
+
+    .service-card-ai .service-card-content p {
+      display: block;
+      max-width: none;
+      overflow: visible;
+    }
+
     .service-number {
       color: var(--cyan);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -593,6 +610,7 @@ h2,
     .work-link {
       font-family: inherit;
       cursor: pointer;
+      background: transparent;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1342,6 +1360,14 @@ h2,
           </article>
         </div>
 
+        <article class="card service-card service-card-ai">
+          <span class="service-number">/ 005</span>
+          <div class="service-card-content">
+            <h3>Работа с ИИ</h3>
+            <p>Использование генеративных нейросетей по максимуму: от простой генерации визуалов, до продвинутого создания Figma-плагинов и автоматизации рабочих процессов</p>
+          </div>
+        </article>
+
         <div class="software-panel" aria-label="Список программ и инструментов">
           <div class="software-title">Software stack</div>
           <div class="software-list">
@@ -1487,8 +1513,8 @@ h2,
                 data-label="Presentation"
               >
                 <img
-                  src="assets/works/presentation-01/cover.jpg"
-                  alt="Название презентации"
+                  src="assets/works/presentation-01/cover-antireal.png"
+                  alt="Презентации и инфографика — типографика FORM / DATA и диаграммы"
                 />
               </div>
 
@@ -1623,211 +1649,6 @@ h2,
   </footer>
 
 
-  <script>
-    /*
-      ==============================
-      DRAG-СКРОЛЛ И АВТОПРОКРУТКА ДЛЯ СЛАЙДЕРА РАБОТ
-      ==============================
-      Возможности:
-      1. Нативный горизонтальный скролл колесом мыши, тачпадом и свайпом.
-      2. Drag мышью прямо по карточкам.
-      3. Медленная автоматическая зацикленная прокрутка.
-
-      Где менять скорость автопрокрутки:
-      autoSpeed = 0.35;
-      Чем больше число — тем быстрее двигается слайдер.
-    */
-    /*
-      ==============================
-      TEXT SCRAMBLE ДЛЯ HERO-ЛЕЙБЛА
-      ==============================
-      Чтобы поменять текст, измени data-text у элемента .scramble-text в главном экране.
-      Чтобы поменять набор символов для эффекта, измени chars ниже.
-    */
-    const scrambleText = document.querySelector('.scramble-text');
-
-    if (scrambleText) {
-      const finalText = scrambleText.dataset.text || scrambleText.textContent;
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\_-+*#';
-      let frame = 0;
-      let intervalId = null;
-
-      const runScramble = () => {
-        clearInterval(intervalId);
-        frame = 0;
-
-        intervalId = setInterval(() => {
-          const output = finalText
-            .split('')
-            .map((char, index) => {
-              if (char === ' ') return ' ';
-              if (index < frame) return finalText[index];
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join('');
-
-          scrambleText.textContent = output;
-          frame += 1;
-
-          if (frame > finalText.length) {
-            scrambleText.textContent = finalText;
-            clearInterval(intervalId);
-          }
-        }, 64);
-      };
-
-      runScramble();
-      setInterval(runScramble, 9000);
-    }
-
-    /*
-      ==============================
-      ПОСЛЕДОВАТЕЛЬНАЯ ПОДСВЕТКА SOFTWARE STACK
-      ==============================
-      Иконки мягко подсвечиваются по очереди, будто на каждую наводится курсор.
-      Чтобы изменить скорость, поменяй softwareHighlightDelay ниже.
-    */
-    const softwareItems = Array.from(document.querySelectorAll('.software-item'));
-
-    if (softwareItems.length) {
-      let activeSoftwareIndex = 0;
-      const softwareHighlightDelay = 1100;
-
-      const highlightSoftwareItem = () => {
-        softwareItems.forEach((item) => item.classList.remove('is-highlighted'));
-        softwareItems[activeSoftwareIndex].classList.add('is-highlighted');
-        activeSoftwareIndex = (activeSoftwareIndex + 1) % softwareItems.length;
-      };
-
-      highlightSoftwareItem();
-      setInterval(highlightSoftwareItem, softwareHighlightDelay);
-    }
-
-    const worksSlider = document.querySelector('.works-slider');
-
-    if (worksSlider) {
-      const originalCards = Array.from(worksSlider.children);
-      const autoSpeed = 0.20;
-
-      let isDown = false;
-      let startX = 0;
-      let scrollLeft = 0;
-      let moved = false;
-      let isPaused = false;
-      let singleSetWidth = 0;
-      let autoScrollPosition = 0;
-
-      /*
-        Клонируем карточки, чтобы визуально получить бесконечную ленту.
-        При добавлении новых карточек руками ничего менять в JS не нужно.
-      */
-      originalCards.forEach((card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        worksSlider.appendChild(clone);
-      });
-
-      const updateSingleSetWidth = () => {
-        singleSetWidth = worksSlider.scrollWidth / 2;
-        autoScrollPosition = worksSlider.scrollLeft;
-      };
-
-      updateSingleSetWidth();
-      window.addEventListener('resize', updateSingleSetWidth);
-
-      const normalizeScrollPosition = () => {
-        if (!singleSetWidth) return;
-
-        if (worksSlider.scrollLeft >= singleSetWidth) {
-          worksSlider.scrollLeft -= singleSetWidth;
-        }
-
-        if (worksSlider.scrollLeft < 0) {
-          worksSlider.scrollLeft += singleSetWidth;
-        }
-
-        autoScrollPosition = worksSlider.scrollLeft;
-      };
-
-      const autoScroll = () => {
-        if (!isPaused && !isDown && singleSetWidth) {
-          autoScrollPosition += autoSpeed;
-
-          if (autoScrollPosition >= singleSetWidth) {
-            autoScrollPosition -= singleSetWidth;
-          }
-
-          worksSlider.scrollLeft = autoScrollPosition;
-        }
-
-        requestAnimationFrame(autoScroll);
-      };
-
-      requestAnimationFrame(autoScroll);
-
-      worksSlider.addEventListener('pointerdown', (event) => {
-        isDown = true;
-        moved = false;
-        isPaused = true;
-        startX = event.pageX - worksSlider.offsetLeft;
-        scrollLeft = worksSlider.scrollLeft;
-        worksSlider.classList.add('is-dragging');
-        worksSlider.setPointerCapture(event.pointerId);
-      });
-
-      worksSlider.addEventListener('pointermove', (event) => {
-        if (!isDown) return;
-
-        const x = event.pageX - worksSlider.offsetLeft;
-        const walk = x - startX;
-
-        if (Math.abs(walk) > 4) {
-          moved = true;
-        }
-
-        worksSlider.scrollLeft = scrollLeft - walk;
-        normalizeScrollPosition();
-      });
-
-      worksSlider.addEventListener('pointerup', (event) => {
-        isDown = false;
-        isPaused = false;
-        worksSlider.classList.remove('is-dragging');
-        worksSlider.releasePointerCapture(event.pointerId);
-        normalizeScrollPosition();
-      });
-
-      worksSlider.addEventListener('pointerleave', () => {
-        isDown = false;
-        isPaused = false;
-        worksSlider.classList.remove('is-dragging');
-      });
-
-      worksSlider.addEventListener('focusin', () => {
-        isPaused = true;
-      });
-
-      worksSlider.addEventListener('focusout', () => {
-        isPaused = false;
-      });
-
-      worksSlider.addEventListener('scroll', () => {
-        if (isDown) {
-          normalizeScrollPosition();
-        } else {
-          autoScrollPosition = worksSlider.scrollLeft;
-        }
-      });
-
-      worksSlider.addEventListener('click', (event) => {
-        if (moved) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }, true);
-    }
-  </script>
-
   <!-- =========================================================
        LIGHTBOX / POPUP
        ========================================================= -->
@@ -1939,6 +1760,385 @@ h2,
     </div>
 
   </div>
+
+
+
+  <script>
+    /*
+      ==============================
+      DRAG-СКРОЛЛ И АВТОПРОКРУТКА ДЛЯ СЛАЙДЕРА РАБОТ
+      ==============================
+      Возможности:
+      1. Нативный горизонтальный скролл колесом мыши, тачпадом и свайпом.
+      2. Drag мышью прямо по карточкам.
+      3. Медленная автоматическая зацикленная прокрутка.
+
+      Где менять скорость автопрокрутки:
+      autoSpeed = 0.35;
+      Чем больше число — тем быстрее двигается слайдер.
+    */
+    /*
+      ==============================
+      TEXT SCRAMBLE ДЛЯ HERO-ЛЕЙБЛА
+      ==============================
+      Чтобы поменять текст, измени data-text у элемента .scramble-text в главном экране.
+      Чтобы поменять набор символов для эффекта, измени chars ниже.
+    */
+    const scrambleText = document.querySelector('.scramble-text');
+
+    if (scrambleText) {
+      const finalText = scrambleText.dataset.text || scrambleText.textContent;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\_-+*#';
+      let frame = 0;
+      let intervalId = null;
+
+      const runScramble = () => {
+        clearInterval(intervalId);
+        frame = 0;
+
+        intervalId = setInterval(() => {
+          const output = finalText
+            .split('')
+            .map((char, index) => {
+              if (char === ' ') return ' ';
+              if (index < frame) return finalText[index];
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join('');
+
+          scrambleText.textContent = output;
+          frame += 1;
+
+          if (frame > finalText.length) {
+            scrambleText.textContent = finalText;
+            clearInterval(intervalId);
+          }
+        }, 64);
+      };
+
+      runScramble();
+      setInterval(runScramble, 9000);
+    }
+
+    /*
+      ==============================
+      ПОСЛЕДОВАТЕЛЬНАЯ ПОДСВЕТКА SOFTWARE STACK
+      ==============================
+      Иконки мягко подсвечиваются по очереди, будто на каждую наводится курсор.
+      Чтобы изменить скорость, поменяй softwareHighlightDelay ниже.
+    */
+    const aiServiceCard = document.querySelector('.service-card-ai');
+    const softwarePanel = document.querySelector('.software-panel');
+    const syncAiCardHeight = () => {
+      aiServiceCard.style.minHeight = `${softwarePanel.getBoundingClientRect().height * 1.5}px`;
+    };
+    syncAiCardHeight();
+    new ResizeObserver(syncAiCardHeight).observe(softwarePanel);
+
+    const softwareItems = Array.from(document.querySelectorAll('.software-item'));
+
+    if (softwareItems.length) {
+      let activeSoftwareIndex = 0;
+      const softwareHighlightDelay = 1100;
+
+      const highlightSoftwareItem = () => {
+        softwareItems.forEach((item) => item.classList.remove('is-highlighted'));
+        softwareItems[activeSoftwareIndex].classList.add('is-highlighted');
+        activeSoftwareIndex = (activeSoftwareIndex + 1) % softwareItems.length;
+      };
+
+      highlightSoftwareItem();
+      setInterval(highlightSoftwareItem, softwareHighlightDelay);
+    }
+
+    /*
+      ==============================
+      ДАННЫЕ ПРЕЗЕНТАЦИЙ ДЛЯ LIGHTBOX
+      ==============================
+      Для каждой страницы в slides укажи src, title и description.
+      Описание карточки Selected Works редактируется отдельно в HTML.
+      Старый формат слайда (строка с путём) также поддерживается.
+      Значение presentation-01 должно совпадать с data-gallery в карточке.
+    */
+    const portfolioGalleries = {
+      'presentation-01': {
+        type: 'Presentation',
+        title: 'Презентации и инфографика',
+        description: 'Подборка слайдов и инфографики из презентационных проектов.',
+        slides: [
+          {
+            src: 'wn-welcome-training/wn-welcome-training.png',
+            title: 'Welcome тренинг для новых сотрудников в WN Media Group',
+            description: 'Ознакомительная презентация о структуре и корпоративной культуре'
+          },
+          { src: 'assets/works/presentation-01/01.jpg', title: '', description: '' },
+          { src: 'assets/works/presentation-01/02.jpg', title: '', description: '' },
+          { src: 'assets/works/presentation-01/03.jpg', title: '', description: '' },
+          { src: 'assets/works/presentation-01/04.jpg', title: '', description: '' },
+          { src: 'assets/works/presentation-01/05.jpg', title: '', description: '' },
+          { src: 'assets/works/presentation-01/06.jpg', title: '', description: '' }
+        ]
+      }
+    };
+
+    /*
+      ==============================
+      PORTFOLIO LIGHTBOX
+      ==============================
+      Один popup работает и для галереи презентации, и для одиночного изображения.
+    */
+    const lightbox = document.querySelector('#portfolio-lightbox');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxTitle = lightbox.querySelector('.lightbox-title');
+    const lightboxDescription = lightbox.querySelector('.lightbox-description');
+    const lightboxType = lightbox.querySelector('.lightbox-type');
+    const lightboxCurrent = lightbox.querySelector('.lightbox-current');
+    const lightboxTotal = lightbox.querySelector('.lightbox-total');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxBackdrop = lightbox.querySelector('.lightbox-backdrop');
+
+    let activeGallery = [];
+    let activeSlide = 0;
+    let activeGalleryTitle = '';
+
+    const openLightbox = () => {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('is-open', 'is-single');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    const renderSlide = () => {
+      if (!activeGallery.length) return;
+
+      const entry = activeGallery[activeSlide];
+      const slide = typeof entry === 'string' ? { src: entry } : entry;
+      lightboxTitle.textContent = slide.title || activeGalleryTitle;
+      lightboxDescription.textContent = slide.description || '';
+      lightboxDescription.hidden = !slide.description;
+      lightboxImage.src = slide.src;
+      lightboxImage.alt = `${lightboxTitle.textContent} — ${activeSlide + 1}`;
+      lightboxCurrent.textContent = String(activeSlide + 1).padStart(2, '0');
+      lightboxTotal.textContent = String(activeGallery.length).padStart(2, '0');
+    };
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('.lightbox-trigger');
+      if (!trigger) return;
+
+      event.preventDefault();
+      const type = trigger.dataset.lightboxType;
+
+      if (type === 'gallery') {
+        const gallery = portfolioGalleries[trigger.dataset.gallery];
+        if (!gallery) return;
+
+        activeGallery = gallery.slides;
+        activeSlide = 0;
+
+        lightbox.classList.remove('is-single');
+        lightboxType.textContent = gallery.type;
+        activeGalleryTitle = gallery.title;
+
+        renderSlide();
+        openLightbox();
+      }
+
+      if (type === 'image') {
+        activeGallery = [];
+        activeSlide = 0;
+
+        lightbox.classList.add('is-single');
+        lightboxImage.src = trigger.dataset.image || '';
+        lightboxImage.alt = trigger.dataset.title || 'Графическая работа';
+        lightboxType.textContent = 'Graphic Work';
+        lightboxTitle.textContent = trigger.dataset.title || '';
+        lightboxDescription.textContent = trigger.dataset.description || '';
+        lightboxDescription.hidden = !trigger.dataset.description;
+
+        openLightbox();
+      }
+    });
+
+    lightboxPrev.addEventListener('click', () => {
+      if (!activeGallery.length) return;
+      activeSlide = (activeSlide - 1 + activeGallery.length) % activeGallery.length;
+      renderSlide();
+    });
+
+    lightboxNext.addEventListener('click', () => {
+      if (!activeGallery.length) return;
+      activeSlide = (activeSlide + 1) % activeGallery.length;
+      renderSlide();
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('is-open')) return;
+
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+
+      if (event.key === 'ArrowRight' && activeGallery.length) {
+        activeSlide = (activeSlide + 1) % activeGallery.length;
+        renderSlide();
+      }
+
+      if (event.key === 'ArrowLeft' && activeGallery.length) {
+        activeSlide = (activeSlide - 1 + activeGallery.length) % activeGallery.length;
+        renderSlide();
+      }
+    });
+
+    const worksSlider = document.querySelector('.works-slider');
+
+    if (worksSlider) {
+      const originalCards = Array.from(worksSlider.children);
+      const autoSpeed = 0.20;
+
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let moved = false;
+      let isPaused = false;
+      let singleSetWidth = 0;
+      let autoScrollPosition = 0;
+
+      /*
+        Клонируем карточки, чтобы визуально получить бесконечную ленту.
+        При добавлении новых карточек руками ничего менять в JS не нужно.
+      */
+      originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        worksSlider.appendChild(clone);
+      });
+
+      const updateSingleSetWidth = () => {
+        singleSetWidth = worksSlider.scrollWidth / 2;
+        autoScrollPosition = worksSlider.scrollLeft;
+      };
+
+      updateSingleSetWidth();
+      window.addEventListener('resize', updateSingleSetWidth);
+
+      const normalizeScrollPosition = () => {
+        if (!singleSetWidth) return;
+
+        if (worksSlider.scrollLeft >= singleSetWidth) {
+          worksSlider.scrollLeft -= singleSetWidth;
+        }
+
+        if (worksSlider.scrollLeft < 0) {
+          worksSlider.scrollLeft += singleSetWidth;
+        }
+
+        autoScrollPosition = worksSlider.scrollLeft;
+      };
+
+      const autoScroll = () => {
+        if (!isPaused && !isDown && !lightbox.classList.contains('is-open') && singleSetWidth) {
+          autoScrollPosition += autoSpeed;
+
+          if (autoScrollPosition >= singleSetWidth) {
+            autoScrollPosition -= singleSetWidth;
+          }
+
+          worksSlider.scrollLeft = autoScrollPosition;
+        }
+
+        requestAnimationFrame(autoScroll);
+      };
+
+      requestAnimationFrame(autoScroll);
+
+      let activePointerId = null;
+
+      worksSlider.addEventListener('pointerdown', (event) => {
+        // Buttons and links must retain their normal click target.
+        if (event.pointerType !== 'mouse' || event.button !== 0 ||
+            event.target.closest('button, a, input, select, textarea, [role="button"]')) return;
+
+        isDown = true;
+        moved = false;
+        isPaused = true;
+        activePointerId = event.pointerId;
+        startX = event.pageX;
+        scrollLeft = worksSlider.scrollLeft;
+      });
+
+      worksSlider.addEventListener('pointermove', (event) => {
+        if (!isDown || event.pointerId !== activePointerId) return;
+
+        const walk = event.pageX - startX;
+        if (!moved && Math.abs(walk) <= 4) return;
+
+        if (!moved) {
+          moved = true;
+          worksSlider.classList.add('is-dragging');
+          worksSlider.setPointerCapture(event.pointerId);
+        }
+        event.preventDefault();
+        worksSlider.scrollLeft = scrollLeft - walk;
+        normalizeScrollPosition();
+      });
+
+      const finishDrag = (event) => {
+        if (event.pointerId !== activePointerId) return;
+        isDown = false;
+        isPaused = worksSlider.contains(document.activeElement);
+        worksSlider.classList.remove('is-dragging');
+        activePointerId = null;
+        if (worksSlider.hasPointerCapture(event.pointerId)) {
+          worksSlider.releasePointerCapture(event.pointerId);
+        }
+        normalizeScrollPosition();
+        // The synthetic click following pointerup is handled before this reset.
+        setTimeout(() => { moved = false; }, 0);
+      };
+
+      worksSlider.addEventListener('pointerup', finishDrag);
+      worksSlider.addEventListener('pointercancel', finishDrag);
+      worksSlider.addEventListener('lostpointercapture', finishDrag);
+      worksSlider.addEventListener('pointerleave', (event) => {
+        if (!moved) finishDrag(event);
+      });
+      worksSlider.addEventListener('dragstart', (event) => event.preventDefault());
+
+      worksSlider.addEventListener('focusin', () => {
+        isPaused = true;
+      });
+
+      worksSlider.addEventListener('focusout', () => {
+        isPaused = false;
+      });
+
+      worksSlider.addEventListener('scroll', () => {
+        if (isDown) {
+          normalizeScrollPosition();
+        } else {
+          autoScrollPosition = worksSlider.scrollLeft;
+        }
+      });
+
+      worksSlider.addEventListener('click', (event) => {
+        if (moved && event.detail !== 0) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+    }
+  </script>
 
 </body>
 </html>
