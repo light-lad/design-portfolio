@@ -998,6 +998,16 @@ h2,
     }
 
 
+    .lightbox[data-gallery="presentation-01"] .lightbox-media {
+      border-radius: var(--radius-md);
+    }
+
+
+    .lightbox[data-gallery="presentation-01"] .lightbox-image {
+      border-radius: var(--radius-md);
+    }
+
+
     .lightbox-image {
       width: 100%;
       height: 100%;
@@ -1008,6 +1018,23 @@ h2,
       object-fit: contain;
     }
 
+
+    .lightbox-media [hidden] {
+      display: none !important;
+    }
+
+    .lightbox-media:has(.lightbox-video:not([hidden])) {
+      border-radius: 18px;
+    }
+
+    .lightbox-video {
+      border-radius: 18px;
+      overflow: hidden;
+      width: 100%;
+      max-height: calc(100vh - 180px);
+      object-fit: contain;
+      background: #000;
+    }
 
     /* =========================================================
        RIGHT INFO
@@ -1228,11 +1255,11 @@ h2,
             <span class="scramble-text" data-text="Graphic Design / Visual Systems">Graphic Design / Visual Systems</span>
           </div>
 
-          <h1>Дизайн для брендов, событий и digital-коммуникаций</h1>
+          <h1>Дизайн для брендов и мероприятий</h1>
 
           <p class="hero-text">
-            Я графический дизайнер. Создаю айдентику, промо-материалы, визуальные системы
-            и графику для онлайн- и офлайн-носителей.
+            Разрабатываю айдентику, рекламные материалы, презентации и графику
+            для сайтов, соцсетей и печати.
           </p>
 
           <div class="hero-actions">
@@ -1284,7 +1311,7 @@ h2,
         <div class="section-head">
           <div class="section-kicker">01 / About</div>
           <div>
-            <h2>Не просто красивые макеты, а работающая визуальная система.</h2>
+            <h2>От идеи до готового макета</h2>
           </div>
         </div>
 
@@ -1292,16 +1319,16 @@ h2,
           <div class="card">
             <h3>Кто я</h3>
             <p>
-              Я работаю с графическим дизайном для брендов, мероприятий и digital-проектов более 8 лет:
-              от идеи и визуального направления до финальных макетов для печати и публикации.
+              Более 8 лет занимаюсь графическим дизайном для брендов и мероприятий.
+              Разрабатываю концепции, создаю макеты и готовлю файлы для публикации и печати.
             </p>
           </div>
 
           <div class="card">
             <h3>Мой подход</h3>
             <p>
-              Строю дизайн как систему: цвет, типографика, сетка, акценты и декоративные элементы
-              работают не случайно, а помогают считывать смысл и структуру материала.
+              Начинаю с задачи, содержания и форматов. На этой основе выбираю типографику,
+              цвет и композицию, затем адаптирую дизайн для нужных носителей.
             </p>
           </div>
         </div>
@@ -1321,7 +1348,7 @@ h2,
           <div>
             <h2>Направления работы</h2>
             <p class="lead">
-              Подбираю визуальный язык под задачу: от строгой айдентики до выразительной промо-графики.
+              Фирменный стиль, реклама, презентации и печать. Продумываю общую концепцию и довожу каждый макет до выпуска.
             </p>
           </div>
         </div>
@@ -1331,7 +1358,7 @@ h2,
             <span class="service-number">/ 001</span>
             <div class="service-card-content">
               <h3>Айдентика</h3>
-              <p>Логотипы, цветовые палитры, визуальные правила и базовые гайдлайны.</p>
+              <p>Логотипы, фирменные цвета, типографика и руководства по использованию стиля.</p>
             </div>
           </article>
 
@@ -1347,7 +1374,7 @@ h2,
             <span class="service-number">/ 003</span>
             <div class="service-card-content">
               <h3>Digital-графика</h3>
-              <p>Креативы для соцсетей, рассылок, презентаций, сайтов и рекламных кампаний.</p>
+              <p>Графика для сайтов, соцсетей, рассылок и рекламных кампаний.</p>
             </div>
           </article>
 
@@ -1355,7 +1382,7 @@ h2,
             <span class="service-number">/ 004</span>
             <div class="service-card-content">
               <h3>Полиграфия</h3>
-              <p>Печатные материалы, адаптации форматов и подготовка файлов к производству.</p>
+              <p>Вёрстка печатных материалов, адаптация макетов и подготовка файлов к печати.</p>
             </div>
           </article>
         </div>
@@ -1364,7 +1391,7 @@ h2,
           <span class="service-number">/ 005</span>
           <div class="service-card-content">
             <h3>Работа с ИИ</h3>
-            <p>Использование генеративных нейросетей по максимуму: от простой генерации визуалов, до продвинутого создания Figma-плагинов и автоматизации рабочих процессов</p>
+            <p>Генерирую и дорабатываю изображения, создаю Figma-плагины, автоматизирую рабочие процессы и использую ИИ-агентов.</p>
           </div>
         </article>
 
@@ -1431,9 +1458,9 @@ h2,
         <div class="section-head">
           <div class="section-kicker">03 / Selected Works</div>
           <div>
-            <h2>Избранные кейсы и фрагменты работ</h2>
+            <h2>Избранные работы</h2>
             <p class="lead">
-              Айдентика, промо, диджитал, печатка и отдельные эксперименты.
+              Айдентика мероприятий, рекламная графика, презентации и моушн-дизайн.
             </p>
           </div>
         </div>
@@ -1452,7 +1479,7 @@ h2,
                 </div>
                 <h3>WN Growth Summit Limassol’26</h3>
                 <p>
-                  Айдентика и коммуникационные материалы для бизнес-саммита игровой индустрии в Лимассоле.
+                  Айдентика, рекламная графика и печатные материалы для саммита игровой индустрии в Лимассоле.
                 </p>
                 <div class="work-actions">
                   <a class="work-link" href="case-page-1.html">Подробнее</a>
@@ -1493,7 +1520,7 @@ h2,
                 </div>
                 <h3>Название проекта №3</h3>
                 <p>
-                  Система шаблонов для социальных сетей, промо-креативы и адаптации под форматы.
+                  Шаблоны и рекламная графика для соцсетей в разных форматах.
                 </p>
                 <div class="work-actions">
                   <a class="work-link" href="cases/project-03.html">Подробнее</a>
@@ -1530,8 +1557,7 @@ h2,
                 </h3>
 
                 <p>
-                  Презентация для международного
-                  B2B-проекта.
+                  Презентации и инфографика для WN Media Group.
                 </p>
 
                 <div class="work-actions">
@@ -1549,6 +1575,28 @@ h2,
 
               </div>
 
+            </article>
+
+            <article class="card work-card">
+              <div class="work-preview" data-label="MOTION">
+                <img src="assets/works/showreel-02/showreel-cover.png" alt="WN Media Group showreel" />
+              </div>
+              <div class="work-content">
+                <div class="work-meta">
+                  <span class="tag">Диджитал</span>
+                  <span class="tag">Айдентика</span>
+                  <span class="tag">Коммуникации</span>
+                </div>
+                <h3>WN Media Group showreel</h3>
+                <p>Подборка моушн-проектов для WN Media Group.</p>
+                <div class="work-actions">
+                  <button class="work-link lightbox-trigger" type="button"
+                    data-lightbox-type="video"
+                    data-video="assets/works/showreel-02/Motion_Showreel_v3.mp4"
+                    data-poster="assets/works/showreel-02/showreel-cover.png"
+                    data-title="WN Media Group showreel">Смотреть</button>
+                </div>
+              </div>
             </article>
 
             <!-- ============================================
@@ -1622,7 +1670,7 @@ h2,
             <div class="section-kicker">05 / Contact</div>
             <h2>Есть задача по дизайну?</h2>
             <p class="lead">
-              Напишите мне — обсудим проект, сроки, формат работы и то, как дизайн может решить вашу задачу.
+              Напишите, что нужно сделать и в какие сроки. Обсудим объём работы и условия.
             </p>
           </div>
 
@@ -1700,6 +1748,8 @@ h2,
             src=""
             alt=""
           />
+          <video class="lightbox-video" controls playsinline preload="none" hidden
+            aria-label="WN Media Group showreel"></video>
 
         </div>
 
@@ -1864,19 +1914,23 @@ h2,
       'presentation-01': {
         type: 'Presentation',
         title: 'Презентации и инфографика',
-        description: 'Подборка слайдов и инфографики из презентационных проектов.',
+        description: 'Презентации и инфографика для WN Media Group.',
         slides: [
           {
-            src: 'wn-welcome-training/wn-welcome-training.png',
-            title: 'Welcome тренинг для новых сотрудников в WN Media Group',
-            description: 'Ознакомительная презентация о структуре и корпоративной культуре'
+            src: 'assets/works/presentation-01/wn-rebranding.png',
+            title: 'Ребрендинг WN Media Group',
+            description: 'Презентация обновлённого фирменного стиля WN Media Group.'
           },
-          { src: 'assets/works/presentation-01/01.jpg', title: '', description: '' },
-          { src: 'assets/works/presentation-01/02.jpg', title: '', description: '' },
-          { src: 'assets/works/presentation-01/03.jpg', title: '', description: '' },
-          { src: 'assets/works/presentation-01/04.jpg', title: '', description: '' },
-          { src: 'assets/works/presentation-01/05.jpg', title: '', description: '' },
-          { src: 'assets/works/presentation-01/06.jpg', title: '', description: '' }
+          {
+            src: 'assets/works/presentation-01/wn-welcome-training.png',
+            title: 'Welcome тренинг для новых сотрудников в WN Media Group',
+            description: 'Презентация для новых сотрудников: структура компании и корпоративная культура.'
+          },
+          {
+            src: "assets/works/presentation-01/riyadh'24-canceled.png",
+            title: 'WN Conference Riyadh ’24',
+            description: 'Визуальное оформление конференции в Эр-Рияде: баннеры и графика на основе геометрических орнаментов.'
+          }
         ]
       }
     };
@@ -1889,6 +1943,7 @@ h2,
     */
     const lightbox = document.querySelector('#portfolio-lightbox');
     const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxVideo = lightbox.querySelector('.lightbox-video');
     const lightboxTitle = lightbox.querySelector('.lightbox-title');
     const lightboxDescription = lightbox.querySelector('.lightbox-description');
     const lightboxType = lightbox.querySelector('.lightbox-type');
@@ -1910,6 +1965,9 @@ h2,
     };
 
     const closeLightbox = () => {
+      lightboxVideo.pause();
+      lightboxVideo.removeAttribute('src');
+      lightboxVideo.load();
       lightbox.classList.remove('is-open', 'is-single');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
@@ -1935,6 +1993,24 @@ h2,
 
       event.preventDefault();
       const type = trigger.dataset.lightboxType;
+      lightboxVideo.pause();
+      lightboxVideo.hidden = type !== 'video';
+      lightboxImage.hidden = type === 'video';
+
+      if (type === 'video') {
+        activeGallery = [];
+        activeSlide = 0;
+        delete lightbox.dataset.gallery;
+        lightbox.classList.add('is-single');
+        lightboxType.textContent = 'Motion';
+        lightboxTitle.textContent = trigger.dataset.title;
+        lightboxDescription.textContent = '';
+        lightboxDescription.hidden = true;
+        lightboxVideo.src = trigger.dataset.video;
+        lightboxVideo.poster = trigger.dataset.poster;
+        lightboxVideo.setAttribute('aria-label', trigger.dataset.title);
+        openLightbox();
+      }
 
       if (type === 'gallery') {
         const gallery = portfolioGalleries[trigger.dataset.gallery];
@@ -1943,6 +2019,7 @@ h2,
         activeGallery = gallery.slides;
         activeSlide = 0;
 
+        lightbox.dataset.gallery = trigger.dataset.gallery;
         lightbox.classList.remove('is-single');
         lightboxType.textContent = gallery.type;
         activeGalleryTitle = gallery.title;
@@ -1955,6 +2032,7 @@ h2,
         activeGallery = [];
         activeSlide = 0;
 
+        delete lightbox.dataset.gallery;
         lightbox.classList.add('is-single');
         lightboxImage.src = trigger.dataset.image || '';
         lightboxImage.alt = trigger.dataset.title || 'Графическая работа';
