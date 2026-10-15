@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    ==============================
+    НАЗВАНИЕ СТРАНИЦЫ
+    ==============================
+    Здесь меняется название кейса во вкладке браузера.
+  -->
+  <title>Кейс 2 — WN Conference Istanbul’25</title>
+
+  <style>
+    /* =========================================================
+       ОСНОВНЫЕ НАСТРОЙКИ
+       ========================================================= */
+
+    :root {
+      --bg: #0d0f0f;
+      --bg-soft: #141817;
+      --bg-panel: #1b201f;
+
+      --text: #e6ebe7;
+      --muted: #89918c;
+
+      --line: rgba(230, 235, 231, 0.12);
+
+      --acid: #c9ff3f;
+      --cyan: #45f0ff;
+      --orange: #ff7a1a;
+
+      --radius-lg: 28px;
+      --radius-md: 18px;
+
+      --container: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* =========================================================
+       ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА
+       ========================================================= */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    @supports not (overflow: clip) {
+      html,
+      body {
+        overflow-x: hidden;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+
+      background:
+        radial-gradient(
+          circle at 18% 0%,
+          rgba(201, 255, 63, 0.08),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 92% 18%,
+          rgba(69, 240, 255, 0.07),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    /* Не позволяем длинному тексту растягивать страницу */
+
+    h1,
+    h2,
+    .media-caption p {
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================================================
+       ФОНОВАЯ СЕТКА
+       ========================================================= */
+
+    .page-grid {
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+
+      background-size: 56px 56px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 90%
+        );
+
+      z-index: -1;
+    }
+
+    /* =========================================================
+       ОСНОВНОЙ КОНТЕЙНЕР
+       ========================================================= */
+
+    .container {
+      width: min(
+        var(--container),
+        calc(100% - 36px)
+      );
+
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       НАВИГАЦИЯ
+       ========================================================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+
+      z-index: 20;
+
+      backdrop-filter: blur(18px);
+
+      background:
+        rgba(13, 15, 15, 0.72);
+
+      border-bottom:
+        1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 24px;
+
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      font-weight: 700;
+
+      letter-spacing: -0.03em;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--acid);
+
+      box-shadow:
+        0 0 30px
+        rgba(201, 255, 63, 0.16);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 18px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      transition:
+        color 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       HERO КЕЙСА
+       ========================================================= */
+
+    .case-hero {
+      min-height:
+        calc(100vh - 72px);
+
+      padding:
+        96px 0 64px;
+
+      display: grid;
+      align-items: center;
+    }
+
+    .case-hero-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 0.8fr);
+
+      gap: 36px;
+
+      align-items: stretch;
+    }
+
+    /* Не позволяем grid-элементам растягивать страницу */
+
+    .case-hero-layout > *,
+    .section-head > *,
+    .case-summary > *,
+    .case-nav-panel > *,
+    .media-frame {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 10px;
+
+      color: var(--acid);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 13px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.16em;
+
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 8px;
+      height: 8px;
+
+      background: var(--acid);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 16px var(--acid);
+    }
+
+    h1 {
+      max-width: 940px;
+
+      font-size:
+        clamp(48px, 8vw, 112px);
+
+      line-height: 0.9;
+
+      letter-spacing: -0.08em;
+
+      margin-bottom: 28px;
+    }
+
+    .case-hero-text {
+      max-width: 720px;
+
+      color: var(--muted);
+
+      font-size:
+        clamp(18px, 2vw, 22px);
+
+      margin-bottom: 0;
+    }
+
+    /* =========================================================
+       МЕТА-ИНФОРМАЦИЯ КЕЙСА
+       ========================================================= */
+
+    .case-meta-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap: 14px;
+
+      margin-top: 34px;
+    }
+
+    .case-meta-card {
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-md);
+
+      background:
+        rgba(255, 255, 255, 0.035);
+
+      padding: 18px;
+    }
+
+    .case-meta-card span {
+      display: block;
+
+      color: var(--cyan);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+
+      margin-bottom: 10px;
+    }
+
+    .case-meta-card p {
+      color: var(--text);
+
+      margin-bottom: 0;
+
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       ДЕКОРАТИВНЫЙ БЛОК СПРАВА
+       ========================================================= */
+
+    .case-hero-card {
+      min-height: 420px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-lg);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.08),
+          transparent 44%
+        ),
+        var(--bg-soft);
+
+      padding: 24px;
+    }
+
+    .case-signal-panel {
+      position: absolute;
+
+      inset: 24px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 22px;
+
+      padding: 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px,
+          transparent 18px
+        );
+    }
+
+    .case-signal-top,
+    .case-signal-bottom {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      color: var(--muted);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+    }
+
+    .case-visuals {
+      display: grid;
+
+      gap: 18px;
+
+      justify-items: center;
+    }
+
+    /* =========================================================
+       КРУГ С ОБЛОЖКОЙ
+       ========================================================= */
+
+    .case-cover,
+    .case-arrow-marker {
+      border-radius: 50%;
+
+      display: grid;
+
+      place-items: center;
+
+      overflow: hidden;
+
+      align-self: center;
+    }
+
+    .case-cover {
+      width: 160px;
+      height: 160px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(69, 240, 255, 0.12),
+          transparent 42%
+        ),
+        rgba(255, 255, 255, 0.035);
+
+      color: var(--muted);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+    }
+
+    .case-cover img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    /* =========================================================
+       КРУГ СО СТРЕЛКОЙ
+       ========================================================= */
+
+    .case-arrow-marker {
+      width: 120px;
+      height: 120px;
+
+      border:
+        1px solid
+        rgba(201, 255, 63, 0.35);
+
+      color: var(--acid);
+
+      font-size: 42px;
+
+      box-shadow:
+        inset
+        0 0 24px
+        rgba(201, 255, 63, 0.08),
+
+        0 0 28px
+        rgba(201, 255, 63, 0.05);
+
+      animation:
+        arrowPulse
+        2200ms
+        ease-in-out
+        infinite;
+    }
+
+    @keyframes arrowPulse {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+
+        opacity: 0.7;
+      }
+
+      50% {
+        transform:
+          translateY(8px);
+
+        opacity: 0.95;
+      }
+    }
+
+    /* =========================================================
+       ОБЩИЕ СЕКЦИИ
+       ========================================================= */
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-head {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 0.55fr)
+        minmax(0, 1fr);
+
+      gap: 28px;
+
+      margin-bottom: 34px;
+
+      border-top:
+        1px solid var(--line);
+
+      padding-top: 22px;
+    }
+
+    .section-kicker {
+      color: var(--orange);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 13px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+    }
+
+    h2 {
+      font-size:
+        clamp(30px, 4vw, 58px);
+
+      line-height: 1;
+
+      letter-spacing: -0.06em;
+
+      margin-bottom: 0;
+    }
+
+    .lead {
+      color: var(--muted);
+
+      font-size: 18px;
+
+      max-width: 760px;
+    }
+
+    /* =========================================================
+       MEDIA WALL
+       =========================================================
+
+       Сетка — ровный прямоугольник.
+
+       Позиции:
+
+       A A A A A A A A | B B B B
+       A A A A A A A A | B B B B
+
+       A A A A A A A A | C C C C
+       A A A A A A A A | C C C C
+
+       D D D D | E E E E E E E E
+       D D D D | E E E E E E E E
+
+       D D D D | F F F F F F F F
+       D D D D | F F F F F F F F
+    */
+
+/* =========================================================
+   MEDIA WALL — 10 КОНТЕЙНЕРОВ
+   =========================================================
+
+   Сетка повторяет композицию референса.
+
+   24 колонки позволяют довольно точно контролировать
+   пропорции отдельных блоков.
+
+   Общая aspect-ratio фиксирует пропорции всей композиции,
+   поэтому при изменении ширины layout не разваливается.
+*/
+
+.media-wall {
+  display: grid;
+
+  grid-template-columns:
+    repeat(24, minmax(0, 1fr));
+
+  /*
+    Пять горизонтальных зон.
+
+    Пропорции подобраны по референсу:
+    1 — большой верхний ряд
+    2 — средний верхний ряд
+    3 — узкая горизонтальная полоса
+    4–5 — нижний блок
+  */
+  grid-template-rows:
+    334fr
+    251fr
+    137fr
+    153fr
+    153fr;
+
+  gap: 16px;
+
+  width: 100%;
+
+  /*
+    Пропорция всей media wall.
+    Можно немного менять, если захочется
+    сделать галерею выше или компактнее.
+  */
+  aspect-ratio: 976 / 1092;
+}
+
+
+/* =========================================================
+   ОБЩИЙ СТИЛЬ КОНТЕЙНЕРОВ
+   ========================================================= */
+
+.media-frame {
+  position: relative;
+
+  min-width: 0;
+  min-height: 0;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:
+    var(--radius-md);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201, 255, 63, 0.12),
+      transparent 42%
+    ),
+    linear-gradient(
+      315deg,
+      rgba(69, 240, 255, 0.1),
+      transparent 38%
+    ),
+    var(--bg-panel);
+}
+
+
+/* Убираем внутреннюю декоративную рамку,
+   если хочется более чистого вида как на референсе */
+
+.media-frame::before {
+  display: none;
+}
+
+
+/* =========================================================
+   ИЗОБРАЖЕНИЯ / VIDEO
+   ========================================================= */
+
+.media-frame img,
+.media-frame video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 420ms ease,
+    filter 420ms ease;
+}
+
+
+.media-frame:hover img,
+.media-frame:hover video {
+  transform: scale(1.025);
+
+  filter:
+    brightness(0.65);
+}
+
+
+/* =========================================================
+   РАСПОЛОЖЕНИЕ 10 ПЛИТОК
+   ========================================================= */
+
+
+/* 01 — большой верхний горизонтальный */
+
+.media-01 {
+  grid-column: 1 / 17;
+  grid-row: 1 / 2;
+}
+
+
+/* 02 — верхний правый */
+
+.media-02 {
+  grid-column: 17 / 25;
+  grid-row: 1 / 2;
+}
+
+
+/* 03 — высокий вертикальный слева */
+
+.media-03 {
+  grid-column: 1 / 9;
+  grid-row: 2 / 4;
+}
+
+
+/* 04 — центральный блок */
+
+.media-04 {
+  grid-column: 9 / 18;
+  grid-row: 2 / 3;
+}
+
+
+/* 05 — правый блок */
+
+.media-05 {
+  grid-column: 18 / 25;
+  grid-row: 2 / 3;
+}
+
+
+/* 06 — длинная узкая полоса */
+
+.media-06 {
+  grid-column: 9 / 25;
+  grid-row: 3 / 4;
+}
+
+
+/* 07 — нижний левый, верхний */
+
+.media-07 {
+  grid-column: 1 / 9;
+  grid-row: 4 / 5;
+}
+
+
+/* 08 — нижний левый, нижний */
+
+.media-08 {
+  grid-column: 1 / 9;
+  grid-row: 5 / 6;
+}
+
+
+/* 09 — большой нижний центральный */
+
+.media-09 {
+  grid-column: 9 / 21;
+  grid-row: 4 / 6;
+}
+
+
+/* 10 — узкий вертикальный справа */
+
+.media-10 {
+  grid-column: 21 / 25;
+  grid-row: 4 / 6;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  color:
+    rgba(230, 235, 231, 0.4);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   ОПИСАНИЕ ПРИ НАВЕДЕНИИ
+   ========================================================= */
+
+.media-caption {
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+
+  z-index: 3;
+
+  padding: 14px 16px;
+
+  border:
+    1px solid
+    rgba(230, 235, 231, 0.12);
+
+  border-radius: 14px;
+
+  background:
+    rgba(13, 15, 15, 0.82);
+
+  backdrop-filter:
+    blur(14px);
+
+  opacity: 0;
+
+  transform:
+    translateY(8px);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+
+.media-frame:hover
+.media-caption {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+.media-caption span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--acid);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.12em;
+}
+
+
+.media-caption p {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ПЛАНШЕТ
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /*
+    До мобильного сохраняем ту же композицию.
+    Она просто пропорционально уменьшается.
+  */
+
+  .media-wall {
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  /*
+    На телефоне сложная мозаика уже становится слишком мелкой,
+    поэтому превращаем её в обычную ленту.
+  */
+
+  .media-wall {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr);
+
+    grid-template-rows: none;
+
+    aspect-ratio: auto;
+
+    gap: 12px;
+  }
+
+
+  .media-01,
+  .media-02,
+  .media-03,
+  .media-04,
+  .media-05,
+  .media-06,
+  .media-07,
+  .media-08,
+  .media-09,
+  .media-10 {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+
+  .media-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+
+  /*
+    Вертикальные фотографии оставляем более высокими.
+  */
+
+  .media-03,
+  .media-10 {
+    aspect-ratio: 3 / 4;
+  }
+
+
+  /*
+    Узкие горизонтальные блоки.
+  */
+
+  .media-06 {
+    aspect-ratio: 16 / 5;
+  }
+
+}
+
+    /* Навигация в стиле кнопок избранных работ */
+    .case-nav-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .case-nav-link {
+      font-family: inherit;
+      cursor: pointer;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 255, 63, 0.32);
+      color: var(--acid);
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .case-nav-link:hover {
+      transform: translateY(-2px);
+      background: rgba(201, 255, 63, 0.06);
+      border-color: rgba(201, 255, 63, 0.62);
+    }
+
+    .case-nav-link:focus-visible {
+      outline: 2px solid var(--acid);
+      outline-offset: 4px;
+    }
+
+    .case-nav-link span {
+      display: none;
+    }
+
+    .case-nav-link strong {
+      font-weight: inherit;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="page-grid"></div>
+
+  <header class="nav">
+
+    <div class="container nav-inner">
+
+      <a
+        href="index.html"
+        class="logo"
+        aria-label="Вернуться на главную"
+      >
+
+        <span class="logo-mark">
+          ✦
+        </span>
+
+        <!--
+          ИМЯ / ЛОГОТИП
+        -->
+
+        <span>
+          Георгий Рыжов
+        </span>
+
+      </a>
+
+      <nav
+        class="nav-links"
+        aria-label="Навигация по кейсу"
+      >
+
+        <a href="index.html">
+          Все работы
+        </a>
+
+        <a href="#media">
+          Медиа
+        </a>
+
+        <a href="#summary">
+          О проекте
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <!-- =========================================================
+         01. HERO КЕЙСА
+         ========================================================= -->
+
+    <section
+      class="case-hero"
+      id="top"
+    >
+
+      <div class="container">
+
+        <div class="case-hero-layout">
+
+          <div>
+
+            <!--
+              МАЛЕНЬКАЯ ПОДПИСЬ НАД ЗАГОЛОВКОМ
+            -->
+
+            <div class="eyebrow">
+            Айдентика / Диджитал / Печать
+            </div>
+
+            <!--
+              НАЗВАНИЕ ПРОЕКТА
+            -->
+
+            <h1>
+            WN Conference Istanbul’25
+            </h1>
+
+            <!--
+              КОРОТКОЕ ОПИСАНИЕ
+            -->
+
+            <p class="case-hero-text">
+            Айдентика, рекламная графика и оформление площадки для конференции игровой индустрии в Стамбуле.
+            </p>
+
+            <!-- =================================================
+                 МЕТА-ИНФОРМАЦИЯ
+                 ================================================= -->
+
+            <div
+              class="case-meta-grid"
+              aria-label="Краткая информация о проекте"
+            >
+
+              <div class="case-meta-card">
+
+                <span>
+                  Year
+                </span>
+
+                <p>
+                  2025
+                </p>
+
+              </div>
+
+              <div class="case-meta-card">
+
+                <span>
+                  Role
+                </span>
+
+                <p>
+                  Graphic Designer
+                </p>
+
+              </div>
+
+              <div class="case-meta-card">
+
+                <span>
+                  Scope
+                </span>
+
+                <p>
+                   Event Identity / Digital / Print
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ===================================================
+               ДЕКОРАТИВНЫЙ БЛОК
+               =================================================== -->
+
+          <aside
+            class="case-hero-card"
+            aria-label="Декоративная карточка кейса"
+          >
+
+            <div class="case-signal-panel">
+
+              <div class="case-signal-top">
+
+                <span>
+                  Project Unit
+                </span>
+
+                <span>
+                  Scroll
+                </span>
+
+              </div>
+
+              <div class="case-visuals">
+
+                <!-- =============================================
+                     ОБЛОЖКА ПРОЕКТА
+                     =============================================
+
+                     Положи файл, например, сюда:
+
+                     assets/cases/project-01/cover.jpg
+
+                     Так как страница находится внутри /cases/,
+                     путь будет:
+
+                     ../assets/cases/project-01/cover.jpg
+                -->
+
+                <div class="case-cover">
+                  <img src="case-2-assets/wn-conference-istanbul'25-cover.png"
+                    alt="Обложка WN Conference Istanbul’25"
+                  />
+
+
+                  <span>
+                    Cover
+                  </span>
+
+                </div>
+
+                <!-- =============================================
+                     СТРЕЛКА ВНИЗ
+                     ============================================= -->
+
+                <a
+                  class="case-arrow-marker"
+                  href="#media"
+                  aria-label="Перейти к галерее медиа"
+                >
+                  ↓
+                </a>
+
+              </div>
+
+              <div class="case-signal-bottom">
+
+                <span>
+                  Media Wall
+                </span>
+
+                <span>
+                  ↓
+                </span>
+
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         02. MEDIA WALL
+         ========================================================= -->
+
+    <section id="media">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div class="section-kicker">
+            01 / Media Wall
+          </div>
+
+          <div>
+
+            <h2>
+              Галерея проекта
+            </h2>
+
+            <p class="lead">
+              Визуальный стиль WN Conference Istanbul’25: рекламная графика, экраны WN Hub, мерч и оформление площадки.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- =====================================================
+             МЕДИА МОЗАИКА
+
+             Для картинки:
+             <img src="..." alt="..." />
+
+             Для видео:
+             <video
+               src="..."
+               autoplay
+               muted
+               loop
+               playsinline
+             ></video>
+
+             Временный media-placeholder
+             после добавления медиа нужно удалить.
+             ===================================================== -->
+
+        <div class="media-wall">
+
+  <!-- =====================================================
+       01 — БОЛЬШОЙ ГЛАВНЫЙ ВИЗУАЛ
+       ===================================================== -->
+
+  <figure class="media-frame media-01">
+    <img src="case-2-assets/wn-conference-istanbul'25-main.png" alt="Основной визуал WN Conference Istanbul’25 — 19–20 июня 2025 года." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Main Visual</span>
+      <p>Основной визуал WN Conference Istanbul’25 — 19–20 июня 2025 года.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       02 — ВЕРХНИЙ ПРАВЫЙ
+       ===================================================== -->
+
+  <figure class="media-frame media-02">
+    <img src="case-2-assets/merch.png" alt="Мерч и материалы участников в фирменном стиле конференции." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Merch</span>
+      <p>Мерч и материалы участников в фирменном стиле конференции.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       03 — ВЫСОКИЙ ЛЕВЫЙ
+       ===================================================== -->
+
+  <figure class="media-frame media-03">
+    <img src="case-2-assets/cat-meeting.png" alt="Оформление зоны встреч на площадке Haliç Congress Center." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Meeting Zone</span>
+      <p>Оформление зоны встреч на площадке Haliç Congress Center.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       04
+       ===================================================== -->
+
+  <figure class="media-frame media-04">
+    <img src="case-2-assets/inst-post.png" alt="Анонс конференции в Instagram: адаптация айдентики для соцсетей." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Instagram</span>
+      <p>Анонс конференции в Instagram: адаптация айдентики для соцсетей.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       05
+       ===================================================== -->
+
+  <figure class="media-frame media-05">
+    <img src="case-2-assets/fb-post.png" alt="Рекламная графика для публикации WN Events в Facebook." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Facebook</span>
+      <p>Рекламная графика для публикации WN Events в Facebook.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       06 — ДЛИННАЯ ГОРИЗОНТАЛЬНАЯ ПОЛОСА
+       ===================================================== -->
+
+  <figure class="media-frame media-06">
+    <img src="case-2-assets/a2t-post.png" alt="Баннер для публикации о конференции в App2Top." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Media</span>
+      <p>Баннер для публикации о конференции в App2Top.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       07
+       ===================================================== -->
+
+  <figure class="media-frame media-07">
+    <img src="case-2-assets/hub-main.png" alt="Главный экран конференции на платформе WN Hub." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>WN Hub</span>
+      <p>Главный экран конференции на платформе WN Hub.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       08
+       ===================================================== -->
+
+  <figure class="media-frame media-08">
+    <img src="case-2-assets/hub-login.png" alt="Оформление страницы входа на платформу WN Hub." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>WN Hub / Login</span>
+      <p>Оформление страницы входа на платформу WN Hub.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       09 — БОЛЬШОЕ ФОТО ВНИЗУ
+       ===================================================== -->
+
+  <figure class="media-frame media-09">
+    <img src="case-2-assets/stage.png" alt="Фирменная графика на сцене и трибуне конференции." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Stage</span>
+      <p>Фирменная графика на сцене и трибуне конференции.</p>
+    </figcaption>
+  </figure>
+
+
+  <!-- =====================================================
+       10 — УЗКИЙ ВЕРТИКАЛЬНЫЙ
+       ===================================================== -->
+
+  <figure class="media-frame media-10">
+    <img src="case-2-assets/tags.png" alt="Бейджи участников с цветовым разделением категорий." loading="lazy" />
+    <figcaption class="media-caption">
+      <span>Badges</span>
+      <p>Бейджи участников с цветовым разделением категорий.</p>
+    </figcaption>
+  </figure>
+
+</div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         03. ОПИСАНИЕ КЕЙСА
+         ========================================================= -->
+
+    <section id="summary">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div class="section-kicker">
+            02 / Project Notes
+          </div>
+
+          <div>
+
+            <h2>
+            О проекте
+            </h2>
+
+            <p class="lead">
+            WN Conference Istanbul’25 — международная конференция игровой индустрии, которая прошла 19–20 июня 2025 года в Haliç Congress Center в Стамбуле.
+            Программа объединила выступления экспертов, выставку игр, встречи с издателями и инвесторами, круглые столы и питчи проектов.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="case-summary">
+
+          <!--
+            ==============================
+            ЗАДАЧА
+            ==============================
+          -->
+
+          <article class="summary-card">
+
+            <h3>
+              Задача
+            </h3>
+
+            <p>
+            Разработать визуальное оформление конференции и адаптировать его для рекламных публикаций, платформы WN Hub и площадки.
+            Сохранить единый стиль во всех форматах: от небольшого бейджа и мерча до баннеров и оформления сцены.
+            </p>
+
+          </article>
+
+          <!--
+            ==============================
+            РЕШЕНИЕ
+            ==============================
+          -->
+
+          <article class="summary-card">
+
+            <h3>
+              Решение
+            </h3>
+
+            <p>
+            В основу визуального стиля положил яркий голубой фон и модульный орнамент из цветных геометрических фигур.
+            Адаптировал композиции для соцсетей, публикаций и экранов WN Hub.
+            Перенёс графику на мерч, бейджи, баннер зоны встреч и оформление сцены, объединив цифровые и печатные материалы конференции.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         04. НАВИГАЦИЯ МЕЖДУ КЕЙСАМИ
+         ========================================================= -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="case-nav-panel">
+
+          <!--
+            ССЫЛКА НА ГЛАВНУЮ
+          -->
+
+          <a
+            class="case-nav-link"
+            href="index.html#cases"
+          >
+
+            <span>
+              Back
+            </span>
+
+            <strong>
+              Вернуться к работам
+            </strong>
+
+          </a>
+
+          <!--
+            ССЫЛКА НА СЛЕДУЮЩИЙ КЕЙС
+          -->
+
+          <a
+            class="case-nav-link"
+            href="case-page-3.html"
+          >
+
+            <span>
+              Next Case
+            </span>
+
+            <strong>
+              WN Connect Tbilisi’25
+            </strong>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer>
+    <div class="container">
+      © 2026 Георгий Рыжов. Графический дизайнер.
+    </div>
+  </footer>
+
+</body>
+</html>
