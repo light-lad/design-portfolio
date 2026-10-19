@@ -4,6 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Георгий Рыжов — графический дизайнер</title>
+  <meta name="description" content="Портфолио Георгия Рыжова — графический дизайн, айдентика, event design, digital и визуальные коммуникации." />
+  <link rel="canonical" href="https://gr-design.site/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#0d0f0f" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Георгий Рыжов — графический дизайнер" />
+  <meta property="og:description" content="Портфолио Георгия Рыжова — графический дизайн, айдентика, event design, digital и визуальные коммуникации." />
+  <meta property="og:url" content="https://gr-design.site/" />
+  <meta property="og:image" content="https://gr-design.site/case-1-assets/wn-summit-cover.png" />
+  <meta property="og:locale" content="ru_RU" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Георгий Рыжов — графический дизайнер" />
+  <meta name="twitter:description" content="Портфолио Георгия Рыжова — графический дизайн, айдентика, event design, digital и визуальные коммуникации." />
+  <meta name="twitter:image" content="https://gr-design.site/case-1-assets/wn-summit-cover.png" />
 
   <!--
     ==============================
@@ -41,46 +57,47 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    @supports not (overflow: clip) {
       html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: clip;
-}
+      body {
+        overflow-x: hidden;
+      }
+    }
 
-@supports not (overflow: clip) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-}
+    /* Не разрешаем содержимому растягивать grid-колонки */
+    .case-hero-layout {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    }
 
-/* Не разрешаем содержимому растягивать grid-колонки */
-.case-hero-layout {
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-}
+    .section-head {
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+    }
 
-.section-head {
-  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
-}
+    .case-summary {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
 
-.case-summary {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-}
+    .case-nav-panel {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-.case-nav-panel {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+    .media-wall {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
 
-.media-wall {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-h1,
-h2,
-.media-caption p {
-  overflow-wrap: anywhere;
-}
+    h1,
+    h2,
+    .media-caption p {
+      overflow-wrap: anywhere;
     }
 
     html {
@@ -1286,7 +1303,7 @@ h2,
                 Затем раскомментируй строку ниже и удали текст PHOTO.
               -->
               <div class="signal-photo">
-                <img src="portrait.png" alt="Имя Фамилия" />
+                <img src="portrait.png" alt="Имя Фамилия" / decoding="async" fetchpriority="high">
               </div>
 
               <div class="signal-symbol">⌁</div>
@@ -1398,37 +1415,37 @@ h2,
           <div class="software-title">Software stack</div>
           <div class="software-list">
             <span class="software-item" title="Adobe Photoshop">
-              <img class="software-icon" src="stack-logos/photoshop.svg" alt="Adobe Photoshop" />
+              <img class="software-icon" src="stack-logos/photoshop.svg" alt="Adobe Photoshop" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Ps</span>
             </span>
 
             <span class="software-item" title="Adobe Illustrator">
-              <img class="software-icon" src="stack-logos/illustrator.svg" alt="Adobe Illustrator" />
+              <img class="software-icon" src="stack-logos/illustrator.svg" alt="Adobe Illustrator" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Ai</span>
             </span>
 
             <span class="software-item" title="Adobe InDesign">
-              <img class="software-icon" src="stack-logos/indesign.svg" alt="Adobe InDesign" />
+              <img class="software-icon" src="stack-logos/indesign.svg" alt="Adobe InDesign" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Id</span>
             </span>
 
             <span class="software-item" title="Adobe After Effects">
-              <img class="software-icon" src="stack-logos/after-effects.svg" alt="Adobe After Effects" />
+              <img class="software-icon" src="stack-logos/after-effects.svg" alt="Adobe After Effects" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Ae</span>
             </span>
 
             <span class="software-item" title="Figma">
-              <img class="software-icon" src="stack-logos/figma.svg" alt="Figma" />
+              <img class="software-icon" src="stack-logos/figma.svg" alt="Figma" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Fg</span>
             </span>
 
             <span class="software-item" title="Blender">
-              <img class="software-icon" src="stack-logos/blender.svg" alt="Blender" />
+              <img class="software-icon" src="stack-logos/blender.svg" alt="Blender" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Bl</span>
             </span>
 
             <span class="software-item" title="GenAI">
-              <img class="software-icon" src="stack-logos/genai.svg" alt="Blender" />
+              <img class="software-icon" src="stack-logos/genai.svg" alt="Blender" / loading="lazy" decoding="async">
               <span class="software-fallback" aria-hidden="true">Bl</span>
             </span>
 
@@ -1447,7 +1464,7 @@ h2,
       1. Скопируй целиком один блок <article class="card work-card">...</article>.
       2. Поменяй теги, название, описание и подпись data-label.
       3. Если есть изображение — вставь внутрь .work-preview строку:
-         <img src="assets/works/project-name.jpg" alt="Описание изображения" />
+         <img src="assets/works/project-name.jpg" alt="Описание изображения" / loading="lazy" decoding="async">
       4. Если нужна кнопка на подробную страницу — оставь ссылку .work-link.
          Например: href="cases/project-name.html".
       5. Если подробной страницы пока нет — можно временно убрать весь блок .work-actions.
@@ -1468,7 +1485,7 @@ h2,
           <div class="works-slider" aria-label="Слайдер избранных работ">
             <article class="card work-card">
               <div class="work-preview" data-label="Case preview">
-                <img src="case-1-assets/wn-summit-cover.png" alt="Название проекта №1" />
+                <img src="case-1-assets/wn-summit-cover.png" alt="Название проекта №1" / loading="lazy" decoding="async">
               </div>
               <div class="work-content">
                 <div class="work-meta">
@@ -1488,7 +1505,7 @@ h2,
 
             <article class="card work-card">
               <div class="work-preview" data-label="MOTION">
-                <img src="assets/works/showreel-02/showreel-cover.png" alt="WN Media Group showreel" />
+                <img src="assets/works/showreel-02/showreel-cover.png" alt="WN Media Group showreel" / loading="lazy" decoding="async">
               </div>
               <div class="work-content">
                 <div class="work-meta">
@@ -1511,7 +1528,7 @@ h2,
             <article class="card work-card">
               <div class="work-preview" data-label="Case preview">
                 <img src="case-2-assets/wn-conference-istanbul'25-cover.png" alt="WN Conference Istanbul’25"
-                />
+                / loading="lazy" decoding="async">
               </div>
 
               <div class="work-content">
@@ -1544,7 +1561,7 @@ h2,
                 <img
                   src="assets/works/presentation-01/cover-antireal.png"
                   alt="Презентации и инфографика — типографика FORM / DATA и диаграммы"
-                />
+                / loading="lazy" decoding="async">
               </div>
 
               <div class="work-content">
@@ -1581,7 +1598,7 @@ h2,
 
             <article class="card work-card">
               <div class="work-preview" data-label="Case preview">
-                <img src="case-4-assets/wn-connect-shanghai'23-cover.png" alt="WN Connect Shanghai’23 — айдентика встречи игровой индустрии" />
+                <img src="case-4-assets/wn-connect-shanghai'23-cover.png" alt="WN Connect Shanghai’23 — айдентика встречи игровой индустрии" / loading="lazy" decoding="async">
               </div>
               <div class="work-content">
                 <div class="work-meta">
@@ -1606,7 +1623,7 @@ h2,
 
             <article class="card work-card">
               <div class="work-preview" data-label="Case preview">
-                <img src="case-3-assets/wn-connect-tbilisi'25-cover.png" alt="WN Connect Tbilisi’25 — айдентика камерного нетворкинг-ивента" />
+                <img src="case-3-assets/wn-connect-tbilisi'25-cover.png" alt="WN Connect Tbilisi’25 — айдентика камерного нетворкинг-ивента" / loading="lazy" decoding="async">
               </div>
               <div class="work-content">
                 <div class="work-meta"><span class="tag">Айдентика</span><span class="tag">Диджитал</span><span class="tag">Печать</span></div>
@@ -1713,7 +1730,7 @@ h2,
             class="lightbox-image"
             src=""
             alt=""
-          />
+          / loading="lazy" decoding="async">
           <video class="lightbox-video" controls playsinline preload="none" hidden
             aria-label="WN Media Group showreel"></video>
 
