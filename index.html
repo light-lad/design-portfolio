@@ -1256,6 +1256,12 @@
     @media (max-width: 900px) {
       .hero-portrait { min-height: 320px; }
     }
+
+    .hero-portrait-illustration {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
 </style>
 </head>
 <body>
@@ -1316,7 +1322,15 @@
         -->
         <aside class="hero-portrait" aria-label="Портрет дизайнера">
           <div class="hero-portrait-circle">
-            <img src="portrait.png" alt="Портрет дизайнера" decoding="async" fetchpriority="high">
+            <svg class="hero-portrait-illustration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="hero-portrait-title">
+              <title id="hero-portrait-title">Портрет дизайнера</title>
+              <defs>
+                <clipPath id="hero-portrait-cutout" clipPathUnits="userSpaceOnUse">
+                  <path d="M268,41 L235,43 L200,50 L149,81 L131,98 L131,102 L101,140 L101,145 L89,165 L79,198 L78,231 L84,241 L86,262 L98,275 L99,282 L111,296 L118,312 L135,328 L148,349 L180,378 L178,385 L150,412 L111,425 L97,437 L97,443 L118,459 L157,479 L191,490 L227,496 L273,496 L300,492 L338,481 L372,465 L408,440 L434,415 L467,368 L466,365 L448,363 L429,351 L413,349 L380,317 L380,292 L374,265 L374,225 L380,207 L380,194 L385,189 L385,181 L392,169 L392,142 L384,116 L368,98 L351,89 L341,79 L317,71 L308,71 L292,53 L287,55 Z"/>
+                </clipPath>
+              </defs>
+              <image href="portrait.png" x="0" y="0" width="500" height="500" preserveAspectRatio="xMidYMid slice" clip-path="url(#hero-portrait-cutout)"/>
+            </svg>
           </div>
         </aside>
       </div>
