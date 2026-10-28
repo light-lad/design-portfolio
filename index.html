@@ -1231,7 +1231,32 @@
 
     }
 
-  </style>
+  
+    /* Standalone portrait — the rest of the hero layout stays unchanged. */
+    .hero-portrait {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-portrait-circle {
+      width: clamp(240px, 23vw, 320px);
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 50%;
+      background: #ff7a1a;
+      flex: none;
+    }
+    .hero-portrait-circle img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 900px) {
+      .hero-portrait { min-height: 320px; }
+    }
+</style>
 </head>
 <body>
   <div class="page-grid"></div>
@@ -1289,28 +1314,9 @@
           Декоративная карточка справа.
           Можно оставить как есть или заменить на изображение/анимацию/свой знак.
         -->
-        <aside class="hero-card" aria-label="Декоративный визуальный блок">
-          <div class="signal-panel">
-            <div class="signal-top">
-              <span>Portfolio Unit</span>
-              <span>2026</span>
-            </div>
-            <div class="signal-visuals">
-              <!--
-                КРУГ ДЛЯ ФОТО
-                Чтобы вставить фото, положи файл, например, сюда:
-                assets/images/profile.jpg
-                Затем раскомментируй строку ниже и удали текст PHOTO.
-              -->
-              <div class="signal-photo">
-                <img src="portrait.png" alt="Имя Фамилия" / decoding="async" fetchpriority="high">
-              </div>
-
-              <div class="signal-symbol">⌁</div>
-            </div>
-            <div class="signal-bottom">
-              Visual identity / posters / layouts / digital assets / print-ready files
-            </div>
+        <aside class="hero-portrait" aria-label="Портрет дизайнера">
+          <div class="hero-portrait-circle">
+            <img src="portrait.png" alt="Портрет дизайнера" decoding="async" fetchpriority="high">
           </div>
         </aside>
       </div>
