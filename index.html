@@ -581,17 +581,7 @@
       object-fit: cover;
     }
 
-    .work-preview::after {
-      content: attr(data-label);
-      position: absolute;
-      left: 18px;
-      bottom: 16px;
-      color: rgba(230, 235, 231, 0.56);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
+
 
     .work-content {
       padding: 22px;
@@ -1265,6 +1255,21 @@
       width: 100%;
       height: 100%;
     }
+
+    /* Portfolio layout refinements */
+    .about-copy, .contact-copy { margin: 22px 0 0; }
+    .services { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .service-card { padding: 20px; min-width: 0; }
+    .service-card-content { min-height: 250px; }
+    .service-card-content h3 { min-height: 56px; overflow-wrap: anywhere; }
+    .service-card-content p { min-height: 0; display: block; overflow: visible; }
+    .service-card-ai { margin-top: 0; min-height: 230px; }
+    .service-card-ai .service-card-content { min-height: 250px; }
+    .service-card-ai .service-card-content h3 { min-height: 56px; }
+    .contact-links { margin-top: 22px; max-width: 760px; }
+    footer { padding: 0 0 112px; border: 0; }
+    @media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } .service-card-content, .service-card-ai .service-card-content { min-height: 0; } }
+    @media (max-width: 640px) { .services { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1284,7 +1289,7 @@
       </a>
 
       <nav class="nav-links" aria-label="Основная навигация">
-        <a href="#about">О себе</a>
+        <a href="#about">Обо мне</a>
         <a href="#services">Направления</a>
         <a href="#cases">Кейсы</a>
         <a href="#contact">Контакты</a>
@@ -1302,9 +1307,6 @@
     <section class="hero">
       <div class="container hero-layout">
         <div>
-          <div class="eyebrow">
-            <span class="scramble-text" data-text="Graphic Design / Visual Systems">Graphic Design / Visual Systems</span>
-          </div>
 
           <h1>Дизайн для брендов и мероприятий</h1>
 
@@ -1342,25 +1344,8 @@
         <div class="section-head">
           <div class="section-kicker">01 / About</div>
           <div>
-            <h2>От идеи до готового макета</h2>
-          </div>
-        </div>
-
-        <div class="about-grid">
-          <div class="card">
-            <h3>Кто я</h3>
-            <p>
-              Более 8 лет занимаюсь графическим дизайном для брендов и мероприятий.
-              Разрабатываю концепции, создаю макеты и готовлю файлы для публикации и печати.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Мой подход</h3>
-            <p>
-              Начинаю с задачи, содержания и форматов. На этой основе выбираю типографику,
-              цвет и композицию, затем адаптирую дизайн для нужных носителей.
-            </p>
+            <h2>Обо мне</h2>
+            <p class="lead about-copy">Более 8 лет занимаюсь графическим дизайном для брендов и мероприятий. Разрабатываю концепции, создаю макеты и готовлю файлы для публикации и печати.</p>
           </div>
         </div>
       </div>
@@ -1378,9 +1363,7 @@
           <div class="section-kicker">02 / Directions</div>
           <div>
             <h2>Направления работы</h2>
-            <p class="lead">
-              Фирменный стиль, реклама, презентации и печать. Продумываю общую концепцию и довожу каждый макет до выпуска.
-            </p>
+
           </div>
         </div>
 
@@ -1416,7 +1399,6 @@
               <p>Вёрстка печатных материалов, адаптация макетов и подготовка файлов к печати.</p>
             </div>
           </article>
-        </div>
 
         <article class="card service-card service-card-ai">
           <span class="service-number">/ 005</span>
@@ -1425,6 +1407,7 @@
             <p>Генерирую и дорабатываю изображения, создаю Figma-плагины, автоматизирую рабочие процессы и использую ИИ-агентов.</p>
           </div>
         </article>
+        </div>
 
         <div class="software-panel" aria-label="Список программ и инструментов">
           <div class="software-title">Software stack</div>
@@ -1662,36 +1645,22 @@
     -->
     <section id="contact">
       <div class="container">
-        <div class="contact-panel">
+        <div class="section-head">
+          <div class="section-kicker">05 / Contact</div>
           <div>
-            <div class="section-kicker">05 / Contact</div>
-            <h2>Есть задача по дизайну?</h2>
-            <p class="lead">
-              Напишите, что нужно сделать и в какие сроки. Обсудим объём работы и условия.
-            </p>
-          </div>
-
-          <div class="contact-links">
-            <a class="contact-link" href="mailto:coredrill8@gmail.com">
-              <strong>Email</strong>
-              <span>coredrill8@gmail.com</span>
-            </a>
-
-            <a class="contact-link" href="https://t.me/light_lad" target="_blank" rel="noreferrer">
-              <strong>Telegram</strong>
-              <span>@light_lad</span>
-            </a>
+            <h2>Контакты</h2>
+            <p class="lead contact-copy">Открыт для сотрудничества и новых проектов. Связаться со мной можно по почте или в Telegram.</p>
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:coredrill8@gmail.com"><strong>Email</strong><span>coredrill8@gmail.com</span></a>
+              <a class="contact-link" href="https://t.me/light_lad" target="_blank" rel="noreferrer"><strong>Telegram</strong><span>@light_lad</span></a>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      © 2026 Георгий Рыжов. Графический дизайнер.
-    </div>
-  </footer>
+  <footer aria-hidden="true"></footer>
 
 
   <!-- =========================================================
@@ -1874,13 +1843,6 @@
       Иконки мягко подсвечиваются по очереди, будто на каждую наводится курсор.
       Чтобы изменить скорость, поменяй softwareHighlightDelay ниже.
     */
-    const aiServiceCard = document.querySelector('.service-card-ai');
-    const softwarePanel = document.querySelector('.software-panel');
-    const syncAiCardHeight = () => {
-      aiServiceCard.style.minHeight = `${softwarePanel.getBoundingClientRect().height * 1.5}px`;
-    };
-    syncAiCardHeight();
-    new ResizeObserver(syncAiCardHeight).observe(softwarePanel);
 
     const softwareItems = Array.from(document.querySelectorAll('.software-item'));
 
@@ -2217,3 +2179,4 @@
 
 </body>
 </html>
+

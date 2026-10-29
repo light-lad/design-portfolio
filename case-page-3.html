@@ -1138,6 +1138,18 @@
     .connect-wall .connect-portrait img {height:100%;object-fit:cover;}
     .connect-note {color:var(--muted);font-size:12px;margin-top:22px;}
     @media(max-width:640px){.connect-wall{grid-template-columns:minmax(0,1fr)}.connect-wall .media-frame{grid-column:1/-1}}
+
+    /* Match the main page hero and portrait */
+    .case-hero { min-height: 0; display: block; padding: 96px 0 64px; }
+    .case-hero-layout { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 36px; align-items: stretch; }
+    .case-hero h1 { max-width: 900px; font-size: clamp(46px, 8vw, 104px); line-height: .9; letter-spacing: -.08em; overflow-wrap: anywhere; }
+    .case-hero-text { max-width: 690px; margin-bottom: 32px; }
+    .case-portrait { min-height: 420px; display: flex; align-items: center; justify-content: center; }
+    .case-portrait-circle { width: clamp(240px, 23vw, 320px); aspect-ratio: 1; overflow: hidden; border-radius: 50%; flex: none; }
+    .case-portrait-circle img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    footer { padding: 0 0 112px; border: 0; }
+    @media (max-width: 900px) { .case-hero-layout { grid-template-columns: minmax(0, 1fr); } .case-portrait { min-height: 320px; } }
+    @media (max-width: 640px) { .case-hero { padding-top: 64px; } }
   </style>
 </head>
 
@@ -1173,7 +1185,7 @@
       >
 
         <a href="index.html">
-          Все работы
+          Главная
         </a>
 
         <a href="#media">
@@ -1194,151 +1206,16 @@
 
     
 
-    <section
-      class="case-hero"
-      id="top"
-    >
-
-      <div class="container">
-
-        <div class="case-hero-layout">
-
-          <div>
-
-            
-
-            <div class="eyebrow">
-            Айдентика / Диджитал / Печать
-            </div>
-
-            
-
-            <h1>
-            WN Connect Tbilisi’25
-            </h1>
-
-            
-
-            <p class="case-hero-text">
-            Визуальный стиль камерного нетворкинг-ивента для локального геймдев-сообщества: соцсети, мерч и оформление площадки.
-            </p>
-
-            
-
-            <div
-              class="case-meta-grid"
-              aria-label="Краткая информация о проекте"
-            >
-
-              <div class="case-meta-card">
-
-                <span>
-                  Year
-                </span>
-
-                <p>
-                  2025
-                </p>
-
-              </div>
-
-              <div class="case-meta-card">
-
-                <span>
-                  Role
-                </span>
-
-                <p>
-                  Graphic Designer
-                </p>
-
-              </div>
-
-              <div class="case-meta-card">
-
-                <span>
-                  Scope
-                </span>
-
-                <p>
-                   Event Identity / Digital / Print
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          
-
-          <aside
-            class="case-hero-card"
-            aria-label="Декоративная карточка кейса"
-          >
-
-            <div class="case-signal-panel">
-
-              <div class="case-signal-top">
-
-                <span>
-                  Project Unit
-                </span>
-
-                <span>
-                  Scroll
-                </span>
-
-              </div>
-
-              <div class="case-visuals">
-
-                
-
-                <div class="case-cover">
-                  <img src="case-3-assets/wn-connect-tbilisi'25-cover.png"
-                    alt="Обложка WN Connect Tbilisi’25"
-                  / decoding="async" fetchpriority="high">
-
-
-                  <span>
-                    Cover
-                  </span>
-
-                </div>
-
-                
-
-                <a
-                  class="case-arrow-marker"
-                  href="#media"
-                  aria-label="Перейти к галерее медиа"
-                >
-                  ↓
-                </a>
-
-              </div>
-
-              <div class="case-signal-bottom">
-
-                <span>
-                  Media Wall
-                </span>
-
-                <span>
-                  ↓
-                </span>
-
-              </div>
-
-            </div>
-
-          </aside>
-
+    <section class="case-hero" id="top">
+      <div class="container case-hero-layout">
+        <div>
+          <h1>WN Connect Tbilisi’25</h1>
+          <p class="case-hero-text">Визуальный стиль камерного нетворкинг-ивента для локального геймдев-сообщества: соцсети, мерч и оформление площадки.</p>
         </div>
-
+        <aside class="case-portrait" aria-label="Обложка проекта">
+          <div class="case-portrait-circle"><img src="case-3-assets/wn-connect-tbilisi'25-cover.png" alt="Обложка проекта WN Connect Tbilisi’25" decoding="async" fetchpriority="high"></div>
+        </aside>
       </div>
-
     </section>
 
     
@@ -1456,37 +1333,11 @@
 
           
 
-          <a
-            class="case-nav-link"
-            href="index.html#cases"
-          >
-
-            <span>
-              Back
-            </span>
-
-            <strong>
-              Вернуться к работам
-            </strong>
-
-          </a>
+          <a class="case-nav-link" href="https://gr-design.site/#cases"><strong>Вернуться к работам</strong></a>
 
           
 
-          <a
-            class="case-nav-link"
-            href="case-page-4.html"
-          >
-
-            <span>
-              Next Case
-            </span>
-
-            <strong>
-              WN Connect Shanghai’23
-            </strong>
-
-          </a>
+          <a class="case-nav-link" href="case-page-4.html"><strong>Следующий проект</strong></a>
 
         </div>
 
@@ -1498,11 +1349,8 @@
 
   
 
-  <footer>
-    <div class="container">
-      © 2026 Георгий Рыжов. Графический дизайнер.
-    </div>
-  </footer>
+  <footer aria-hidden="true"></footer>
 
 </body>
 </html>
+
