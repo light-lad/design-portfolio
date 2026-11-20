@@ -47,13 +47,13 @@ jobs:
       - name: Authenticate and upload
         shell: bash
         env:
-          YC_SERVICE_ACCOUNT_ID: aje9qe0srkurbp2559s9
+          PORTFOLIO_SERVICE_ACCOUNT_ID: aje9qe0srkurbp2559s9
         run: |
           set -euo pipefail
-          test -n "$YC_SERVICE_ACCOUNT_ID"
+          test -n "$PORTFOLIO_SERVICE_ACCOUNT_ID"
           oidc=$(curl --fail --silent --show-error -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https%3A%2F%2Fgithub.com%2Flight-lad" | jq -er '.value')
           echo "::add-mask::$oidc"
-          token=$(curl --fail --silent --show-error https://auth.yandex.cloud/oauth/token --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' --data-urlencode 'requested_token_type=urn:ietf:params:oauth:token-type:access_token' --data-urlencode "audience=$YC_SERVICE_ACCOUNT_ID" --data-urlencode "subject_token=$oidc" --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:id_token' | jq -er '.access_token')
+          token=$(curl --fail --silent --show-error https://auth.yandex.cloud/oauth/token --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' --data-urlencode 'requested_token_type=urn:ietf:params:oauth:token-type:access_token' --data-urlencode "audience=$PORTFOLIO_SERVICE_ACCOUNT_ID" --data-urlencode "subject_token=$oidc" --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:id_token' | jq -er '.access_token')
           echo "::add-mask::$token"
           export YC_IAM_TOKEN="$token"
           yc storage s3 cp "$RUNNER_TEMP/portfolio-publish/" s3://gr-design.site/ --recursive
