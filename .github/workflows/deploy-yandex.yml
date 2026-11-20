@@ -1,0 +1,61 @@
+name: Publish portfolio to Yandex Object Storage
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: yandex-portfolio
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare public site files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/portfolio-publish"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/portfolio-publish"
+          rm -rf "$RUNNER_TEMP/portfolio-publish/.github"
+          rm -f "$RUNNER_TEMP/portfolio-publish/CNAME"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+
+          base = Path(os.environ['RUNNER_TEMP']) / 'portfolio-publish'
+          for path in base.glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              text = text.replace('https://gr-design.site/#cases', 'index.html#cases')
+              text = text.replace('href="/favicon.svg"', 'href="favicon.svg"')
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Install Yandex Cloud CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location https://storage.yandexcloud.net/yandexcloud-yc/install.sh -o "$RUNNER_TEMP/install-yc.sh"
+          bash "$RUNNER_TEMP/install-yc.sh" -i "$RUNNER_TEMP/yandex-cloud" -n
+          echo "$RUNNER_TEMP/yandex-cloud/bin" >> "$GITHUB_PATH"
+      - name: Authenticate and upload
+        shell: bash
+        env:
+          YC_SERVICE_ACCOUNT_ID: aje9qe0srkurbp2559s9
+        run: |
+          set -euo pipefail
+          test -n "$YC_SERVICE_ACCOUNT_ID"
+          oidc=$(curl --fail --silent --show-error -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https%3A%2F%2Fgithub.com%2Flight-lad" | jq -er '.value')
+          echo "::add-mask::$oidc"
+          token=$(curl --fail --silent --show-error https://auth.yandex.cloud/oauth/token --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' --data-urlencode 'requested_token_type=urn:ietf:params:oauth:token-type:access_token' --data-urlencode "audience=$YC_SERVICE_ACCOUNT_ID" --data-urlencode "subject_token=$oidc" --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:id_token' | jq -er '.access_token')
+          echo "::add-mask::$token"
+          export YC_IAM_TOKEN="$token"
+          yc storage s3 cp "$RUNNER_TEMP/portfolio-publish/" s3://gr-design.site/ --recursive
+          yc storage s3 cp "$RUNNER_TEMP/portfolio-publish/" s3://gr-design.site/ --recursive --exclude '*' --include '*.html' --content-type 'text/html; charset=utf-8'
+          yc storage s3 cp "$RUNNER_TEMP/portfolio-publish/" s3://gr-design.site/ --recursive --exclude '*' --include '*.svg' --content-type 'image/svg+xml'
