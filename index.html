@@ -2020,6 +2020,22 @@
       }
     };
 
+    // Заранее загружаем изображения всех слайдов, пока посетитель смотрит страницу.
+    const preloadedSlides = new Map();
+    Object.values(portfolioGalleries).forEach((gallery) => {
+      gallery.slides.forEach((entry) => {
+        const src = typeof entry === 'string' ? entry : entry.src;
+        if (!src || preloadedSlides.has(src)) return;
+        const image = new Image();
+        const loaded = new Promise((resolve) => {
+          image.onload = () => resolve(true);
+          image.onerror = () => resolve(false);
+          image.src = src;
+        });
+        preloadedSlides.set(src, { image, loaded });
+      });
+    });
+
     /*
       ==============================
       PORTFOLIO LIGHTBOX
@@ -2042,6 +2058,7 @@
     let activeGallery = [];
     let activeSlide = 0;
     let activeGalleryTitle = '';
+    let slideRenderVersion = 0;
 
     const openLightbox = () => {
       lightbox.classList.add('is-open');
@@ -2050,6 +2067,7 @@
     };
 
     const closeLightbox = () => {
+      slideRenderVersion += 1;
       lightboxVideo.pause();
       lightboxVideo.removeAttribute('src');
       lightboxVideo.load();
@@ -2066,8 +2084,16 @@
       lightboxTitle.textContent = slide.title || activeGalleryTitle;
       lightboxDescription.textContent = slide.description || '';
       lightboxDescription.hidden = !slide.description;
-      lightboxImage.src = slide.src;
+      const renderVersion = ++slideRenderVersion;
+      lightboxImage.hidden = true;
       lightboxImage.alt = `${lightboxTitle.textContent} — ${activeSlide + 1}`;
+      const preload = preloadedSlides.get(slide.src);
+      const loaded = preload ? preload.loaded : Promise.resolve(false);
+      loaded.then(() => {
+        if (renderVersion !== slideRenderVersion) return;
+        lightboxImage.src = slide.src;
+        lightboxImage.hidden = false;
+      });
       lightboxCurrent.textContent = String(activeSlide + 1).padStart(2, '0');
       lightboxTotal.textContent = String(activeGallery.length).padStart(2, '0');
     };
@@ -2078,6 +2104,7 @@
 
       event.preventDefault();
       const type = trigger.dataset.lightboxType;
+      slideRenderVersion += 1;
       lightboxVideo.pause();
       lightboxVideo.hidden = type !== 'video';
       lightboxImage.hidden = type === 'video';
