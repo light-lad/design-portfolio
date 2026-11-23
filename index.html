@@ -49,9 +49,9 @@
       --muted: #89918c;           /* второстепенный текст */
       --line: rgba(230, 235, 231, 0.12); /* тонкие линии и обводки */
 
-      --acid: #c9ff3f;            /* кислотный акцент */
-      --cyan: #45f0ff;            /* холодный цифровой акцент */
-      --orange: #ff7a1a;          /* индустриальный предупреждающий акцент */
+      --acid: #4CA0FF;            /* кислотный акцент */
+      --cyan: #4CA0FF;            /* холодный цифровой акцент */
+      --orange: #4CA0FF;          /* индустриальный предупреждающий акцент */
 
       --radius-lg: 28px;
       --radius-md: 18px;
@@ -188,7 +188,7 @@
       display: grid;
       place-items: center;
       color: var(--acid);
-      box-shadow: 0 0 30px rgba(201, 255, 63, 0.16);
+      box-shadow: 0 0 30px rgba(76, 160, 255, 0.16);
     }
 
     .nav-links {
@@ -362,10 +362,10 @@
     }
 
     .signal-symbol {
-      border: 1px solid rgba(201, 255, 63, 0.45);
+      border: 1px solid rgba(76, 160, 255, 0.45);
       color: var(--acid);
       font-size: 42px;
-      box-shadow: inset 0 0 36px rgba(201, 255, 63, 0.12), 0 0 48px rgba(201, 255, 63, 0.08);
+      box-shadow: inset 0 0 36px rgba(76, 160, 255, 0.12), 0 0 48px rgba(76, 160, 255, 0.08);
     }
 
     .signal-bottom {
@@ -614,7 +614,7 @@
       min-height: 38px;
       padding: 0 14px;
       border-radius: 2px;
-      border: 1px solid rgba(201, 255, 63, 0.32);
+      border: 1px solid rgba(76, 160, 255, 0.32);
       color: var(--acid);
       font-size: 13px;
       font-weight: 700;
@@ -624,7 +624,7 @@
     .work-link:hover {
       transform: translateY(-2px);
       background: #0D0F0F;
-      border-color: rgba(201, 255, 63, 0.62);
+      border-color: rgba(76, 160, 255, 0.62);
     }
 
     .slider-hint {
@@ -679,13 +679,13 @@
     .software-item:hover,
     .software-item.is-highlighted {
       transform: translateY(-2px);
-      border-color: rgba(201, 255, 63, 0.45);
+      border-color: rgba(76, 160, 255, 0.45);
       color: var(--acid);
       background: #0D0F0F;
     }
 
     .software-item.is-highlighted {
-      box-shadow: 0 0 26px rgba(201, 255, 63, 0.1);
+      box-shadow: 0 0 26px rgba(76, 160, 255, 0.1);
     }
 
     .software-icon {
@@ -949,7 +949,7 @@
 
     .lightbox-close:hover {
       border-color:
-        rgba(201, 255, 63, 0.5);
+        rgba(76, 160, 255, 0.5);
 
       color: var(--acid);
 
@@ -1131,7 +1131,7 @@
 
     .lightbox-arrow:hover {
       border-color:
-        rgba(201, 255, 63, 0.5);
+        rgba(76, 160, 255, 0.5);
 
       color: var(--acid);
     }
@@ -1244,7 +1244,7 @@
       aspect-ratio: 1;
       overflow: hidden;
       border-radius: 50%;
-      background: #ff7a1a;
+      background: #4CA0FF;
       flex: none;
     }
     .hero-portrait-circle img {
@@ -1403,6 +1403,21 @@
 </style>
 <style>.logo-mark{border:0!important;border-radius: 0!important;box-shadow:none!important;background:none!important}.logo-mark svg{display:block;width:100%;height:100%}</style>
 <style>html,body{background:#0D0F0F}.page-grid{display:none}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@900&display=swap" rel="stylesheet">
+<style>
+:root { --acid:#4CA0FF; --cyan:#4CA0FF; --orange:#4CA0FF; }
+h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !important; font-weight:900 !important; line-height:.8 !important; letter-spacing:-.05em !important; }
+.section-kicker,.lightbox-type { display:none !important; }
+.section-head { grid-template-columns:minmax(0,1fr) !important; }
+.lightbox-label { color:#4CA0FF !important; }
+.hero-portrait-circle,.case-portrait-circle { width:clamp(192px,18.4vw,256px) !important; }
+.button,.work-link,.case-nav-link,button { background:transparent !important; color:#fff !important; border:2px solid transparent !important; border-left:6px solid #fff !important; border-radius:0 !important; box-shadow:none !important; transform:none !important; }
+.button-primary,.work-link,.case-nav-link { border-left-color:#4CA0FF !important; }
+.button:hover,.work-link:hover,.case-nav-link:hover,button:hover,.button:focus-visible,.work-link:focus-visible,.case-nav-link:focus-visible,button:focus-visible { border:2px solid #fff !important; outline:none; }
+</style>
 </head>
 <body>
   <div class="page-grid"></div>
@@ -1824,7 +1839,7 @@
       <div class="lightbox-top">
 
         <div class="lightbox-label">
-          SELECTED WORK / VIEW
+          Избранные работы / Просмотр
         </div>
 
         <button
@@ -2341,6 +2356,9 @@
     }
   </script>
 
+<script src="portrait-halftone.js" defer></script>
+<script src="recolor-covers.js" defer></script>
 </body>
 </html>
+
 

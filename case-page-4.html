@@ -43,9 +43,9 @@
 
       --line: rgba(230, 235, 231, 0.12);
 
-      --acid: #c9ff3f;
-      --cyan: #45f0ff;
-      --orange: #ff7a1a;
+      --acid: #4CA0FF;
+      --cyan: #4CA0FF;
+      --orange: #4CA0FF;
 
       --radius-lg: 28px;
       --radius-md: 18px;
@@ -214,7 +214,7 @@
 
       box-shadow:
         0 0 30px
-        rgba(201, 255, 63, 0.16);
+        rgba(76, 160, 255, 0.16);
     }
 
     .nav-links {
@@ -529,7 +529,7 @@
 
       border:
         1px solid
-        rgba(201, 255, 63, 0.35);
+        rgba(76, 160, 255, 0.35);
 
       color: var(--acid);
 
@@ -538,10 +538,10 @@
       box-shadow:
         inset
         0 0 24px
-        rgba(201, 255, 63, 0.08),
+        rgba(76, 160, 255, 0.08),
 
         0 0 28px
-        rgba(201, 255, 63, 0.05);
+        rgba(76, 160, 255, 0.05);
 
       animation:
         arrowPulse
@@ -907,7 +907,7 @@
       min-height: 38px;
       padding: 0 14px;
       border-radius: 2px;
-      border: 1px solid rgba(201, 255, 63, 0.32);
+      border: 1px solid rgba(76, 160, 255, 0.32);
       color: var(--acid);
       font-size: 13px;
       font-weight: 700;
@@ -917,7 +917,7 @@
     .case-nav-link:hover {
       transform: translateY(-2px);
       background: #0D0F0F;
-      border-color: rgba(201, 255, 63, 0.62);
+      border-color: rgba(76, 160, 255, 0.62);
     }
 
     .case-nav-link:focus-visible {
@@ -955,6 +955,21 @@
   </style>
 <style>.logo-mark{border:0!important;border-radius: 0!important;box-shadow:none!important;background:none!important}.logo-mark svg{display:block;width:100%;height:100%}</style>
 <style>html,body{background:#0D0F0F}.page-grid{display:none}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@900&display=swap" rel="stylesheet">
+<style>
+:root { --acid:#4CA0FF; --cyan:#4CA0FF; --orange:#4CA0FF; }
+h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !important; font-weight:900 !important; line-height:.8 !important; letter-spacing:-.05em !important; }
+.section-kicker,.lightbox-type { display:none !important; }
+.section-head { grid-template-columns:minmax(0,1fr) !important; }
+.lightbox-label { color:#4CA0FF !important; }
+.hero-portrait-circle,.case-portrait-circle { width:clamp(192px,18.4vw,256px) !important; }
+.button,.work-link,.case-nav-link,button { background:transparent !important; color:#fff !important; border:2px solid transparent !important; border-left:6px solid #fff !important; border-radius:0 !important; box-shadow:none !important; transform:none !important; }
+.button-primary,.work-link,.case-nav-link { border-left-color:#4CA0FF !important; }
+.button:hover,.work-link:hover,.case-nav-link:hover,button:hover,.button:focus-visible,.work-link:focus-visible,.case-nav-link:focus-visible,button:focus-visible { border:2px solid #fff !important; outline:none; }
+</style>
 </head>
 
 <body>
@@ -1232,4 +1247,5 @@
 
 </body>
 </html>
+
 
