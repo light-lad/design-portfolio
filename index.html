@@ -2313,6 +2313,9 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
         autoScrollPosition = worksSlider.scrollLeft;
       };
 
+      let animationFrameId = null;
+      let activePointerId = null;
+
       const autoScroll = () => {
         if (!isPaused && !isDown && !lightbox.classList.contains('is-open') && singleSetWidth) {
           autoScrollPosition += autoSpeed;
@@ -2324,12 +2327,33 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
           worksSlider.scrollLeft = autoScrollPosition;
         }
 
-        requestAnimationFrame(autoScroll);
+        animationFrameId = requestAnimationFrame(autoScroll);
       };
 
-      requestAnimationFrame(autoScroll);
+      const startAutoScroll = () => {
+        if (animationFrameId === null) animationFrameId = requestAnimationFrame(autoScroll);
+      };
 
-      let activePointerId = null;
+      window.addEventListener('pagehide', () => {
+        if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      });
+
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          isDown = false;
+          moved = false;
+          activePointerId = null;
+          worksSlider.classList.remove('is-dragging');
+          updateSingleSetWidth();
+          // A restored mouse-focused link must not permanently pause the slider.
+          const focused = document.activeElement;
+          isPaused = worksSlider.contains(focused) && focused.matches(':focus-visible');
+        }
+        startAutoScroll();
+      });
+
+      startAutoScroll();
 
       worksSlider.addEventListener('pointerdown', (event) => {
         // Buttons and links must retain their normal click target.
