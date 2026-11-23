@@ -2358,6 +2358,18 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
 
 <script src="portrait-halftone.js" defer></script>
 <script src="recolor-covers.js" defer></script>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
+<defs><filter id="showreel-blue" color-interpolation-filters="sRGB">
+<feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 1 -1 0 0" result="greenBlue"/>
+<feComponentTransfer in="greenBlue" result="mask1"><feFuncA type="linear" slope="6" intercept="-0.7"/></feComponentTransfer>
+<feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1 1 0 0 0.08" result="greenRed"/>
+<feComponentTransfer in="greenRed" result="mask2"><feFuncA type="linear" slope="10" intercept="-0.55"/></feComponentTransfer>
+<feComposite in="mask1" in2="mask2" operator="in" result="mask"/>
+<feColorMatrix in="SourceGraphic" type="matrix" values="0 0.298 0 0 0  0 0.627 0 0 0  0 1 0 0 0  0 0 0 1 0" result="blue"/>
+<feComposite in="blue" in2="mask" operator="in" result="blueOnly"/>
+<feComposite in="blueOnly" in2="SourceGraphic" operator="over"/>
+</filter></defs></svg>
+<style>.lightbox-video { filter:url(#showreel-blue); }</style>
 </body>
 </html>
 
