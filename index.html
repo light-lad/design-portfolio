@@ -55,7 +55,7 @@
 
       --radius-lg: 28px;
       --radius-md: 18px;
-      --container: 1160px;
+      --container: 1240px;
     }
 
     * {
@@ -151,7 +151,7 @@
     }
 
     .container {
-      width: min(var(--container), calc(100% - 36px));
+      width: min(var(--container), calc(100% - 32px));
       margin: 0 auto;
     }
 
@@ -495,8 +495,10 @@
       margin-right: calc(50% - 50vw);
       overflow: hidden;
       /* Fade the moving cards at the viewport edges without covering controls. */
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 clamp(28px, 6vw, 96px), #000 calc(100% - clamp(28px, 6vw, 96px)), transparent);
-      mask-image: linear-gradient(to right, transparent, #000 clamp(28px, 6vw, 96px), #000 calc(100% - clamp(28px, 6vw, 96px)), transparent);
+      --slider-content-edge: max(16px, calc((100vw - var(--container)) / 2));
+      --slider-fade-size: clamp(24px, 4vw, 64px);
+      -webkit-mask-image: linear-gradient(to right, transparent var(--slider-content-edge), #000 calc(var(--slider-content-edge) + var(--slider-fade-size)), #000 calc(100% - var(--slider-content-edge) - var(--slider-fade-size)), transparent calc(100% - var(--slider-content-edge)));
+      mask-image: linear-gradient(to right, transparent var(--slider-content-edge), #000 calc(var(--slider-content-edge) + var(--slider-fade-size)), #000 calc(100% - var(--slider-content-edge) - var(--slider-fade-size)), transparent calc(100% - var(--slider-content-edge)));
     }
 
     .works-slider-wrap::before,
@@ -525,8 +527,8 @@
       gap: 18px;
       overflow-x: auto;
       scroll-snap-type: none;
-      scroll-padding-inline: calc((100vw - min(var(--container), calc(100vw - 36px))) / 2);
-      padding: 4px calc((100vw - min(var(--container), calc(100vw - 36px))) / 2) 18px;
+      scroll-padding-inline: calc((100vw - min(var(--container), calc(100vw - 32px))) / 2);
+      padding: 4px calc((100vw - min(var(--container), calc(100vw - 32px))) / 2) 18px;
       scrollbar-width: none;
       cursor: grab;
       user-select: none;
@@ -1583,7 +1585,7 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
             <span class="service-number">/ 001</span>
             <div class="service-card-content">
               <h3>Айдентика</h3>
-              <p>Логотипы, фирменные цвета, шрифты и правила использования стиля.</p>
+              <p>Логотипы, шрифты, фирменные цвета и инструкции по стилю бренда.</p>
             </div>
           </article>
 
