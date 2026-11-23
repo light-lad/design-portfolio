@@ -1110,6 +1110,36 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
 .button-primary,.work-link,.case-nav-link { border-left-color:#4CA0FF !important; }
 .button:hover,.work-link:hover,.case-nav-link:hover,button:hover,.button:focus-visible,.work-link:focus-visible,.case-nav-link:focus-visible,button:focus-visible { border:2px solid #fff !important; outline:none; }
 </style>
+<style>
+.hero h1 { text-transform:uppercase; }
+:is(.button,.work-link,.case-nav-link,button:not(.lightbox-close):not(.lightbox-arrow)) {
+  border:2px solid transparent !important;
+  box-shadow:inset 6px 0 0 0 #fff !important;
+  transform:none !important;
+}
+:is(.button-primary,.work-link,.case-nav-link) { box-shadow:inset 6px 0 0 0 #4CA0FF !important; }
+:is(.button,.work-link,.case-nav-link,button:not(.lightbox-close):not(.lightbox-arrow)):hover,
+:is(.button,.work-link,.case-nav-link,button:not(.lightbox-close):not(.lightbox-arrow)):focus-visible {
+  border:2px solid #fff !important;
+  box-shadow:none !important;
+  transform:none !important;
+}
+.lightbox-close,.lightbox-arrow,.lightbox-close:hover,.lightbox-arrow:hover {
+  border:1px solid var(--line) !important;
+  border-radius:2px !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:var(--text) !important;
+  transform:none !important;
+  transition:none !important;
+}
+.lightbox-close:focus-visible,.lightbox-arrow:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+.service-number { display:none !important; }
+.service-card,.service-card-ai { min-height:0 !important; margin-top:0 !important; }
+.service-card-content,.service-card-ai .service-card-content { min-height:0 !important; margin-top:0 !important; }
+.service-card-content h3,.service-card-ai .service-card-content h3 { min-height:0 !important; align-items:flex-start !important; }
+.works-slider-wrap::before,.works-slider-wrap::after { display:none !important; }
+</style>
 </head>
 
 <body>
