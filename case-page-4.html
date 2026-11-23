@@ -1000,6 +1000,12 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
 .service-card-content h3,.service-card-ai .service-card-content h3 { min-height:0 !important; align-items:flex-start !important; }
 .works-slider-wrap::before,.works-slider-wrap::after { display:none !important; }
 </style>
+<style>
+/* Blue markers for case actions; keep the white outline on hover and focus. */
+:is(.button-primary,.work-link,.case-nav-link):not(:hover):not(:focus-visible) {
+  box-shadow: inset 6px 0 0 0 #4CA0FF !important;
+}
+</style>
 </head>
 
 <body>
