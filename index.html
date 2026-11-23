@@ -110,9 +110,7 @@
     body {
       margin: 0;
       background:
-        radial-gradient(circle at 20% 0%, rgba(201, 255, 63, 0.08), transparent 32%),
-        radial-gradient(circle at 90% 20%, rgba(69, 240, 255, 0.07), transparent 28%),
-        var(--bg);
+        #0D0F0F;
       color: var(--text);
       font-family: Inter, Arial, Helvetica, sans-serif;
       line-height: 1.5;
@@ -146,10 +144,9 @@
       pointer-events: none;
       opacity: 0.22;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        none;
       background-size: 56px 56px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      mask-image: none;
       z-index: -1;
     }
 
@@ -162,8 +159,8 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(18px);
-      background: rgba(13, 15, 15, 0.72);
+      backdrop-filter: none;
+      background: #0D0F0F;
       border-bottom: 1px solid var(--line);
     }
 
@@ -274,7 +271,7 @@
       justify-content: center;
       min-height: 48px;
       padding: 0 20px;
-      border-radius: 999px;
+      border-radius: 2px;
       border: 1px solid var(--line);
       font-weight: 700;
       font-size: 14px;
@@ -293,7 +290,7 @@
     }
 
     .button-secondary {
-      background: rgba(255, 255, 255, 0.03);
+      background: #0D0F0F;
     }
 
     .hero-card {
@@ -301,10 +298,9 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
+      border-radius: 2px;
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 44%),
-        var(--bg-soft);
+        #0D0F0F;
       padding: 24px;
     }
 
@@ -312,19 +308,13 @@
       position: absolute;
       inset: 24px;
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 2px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.04),
-          rgba(255, 255, 255, 0.04) 1px,
-          transparent 1px,
-          transparent 18px
-        );
+        #0D0F0F;
     }
 
     .signal-top {
@@ -357,8 +347,7 @@
     .signal-photo {
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(69, 240, 255, 0.12), transparent 42%),
-        rgba(255, 255, 255, 0.035);
+        #0D0F0F;
       color: var(--muted);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 12px;
@@ -426,8 +415,8 @@
 
     .card {
       border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.035);
+      border-radius: 2px;
+      background: #0D0F0F;
       padding: 24px;
     }
 
@@ -520,12 +509,12 @@
 
     .works-slider-wrap::before {
       left: 0;
-      background: linear-gradient(to right, var(--bg), transparent);
+      background: #0D0F0F;
     }
 
     .works-slider-wrap::after {
       right: 0;
-      background: linear-gradient(to left, var(--bg), transparent);
+      background: #0D0F0F;
     }
 
     .works-slider {
@@ -567,9 +556,7 @@
     .work-preview {
       aspect-ratio: 4 / 3;
       background:
-        linear-gradient(135deg, rgba(201, 255, 63, 0.28), transparent 40%),
-        linear-gradient(315deg, rgba(69, 240, 255, 0.18), transparent 38%),
-        var(--bg-panel);
+        #0D0F0F;
       border-bottom: 1px solid var(--line);
       position: relative;
       overflow: hidden;
@@ -603,7 +590,7 @@
 
     .tag {
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 2px;
       padding: 5px 9px;
       color: var(--muted);
       font-size: 12px;
@@ -626,7 +613,7 @@
       justify-content: center;
       min-height: 38px;
       padding: 0 14px;
-      border-radius: 999px;
+      border-radius: 2px;
       border: 1px solid rgba(201, 255, 63, 0.32);
       color: var(--acid);
       font-size: 13px;
@@ -636,7 +623,7 @@
 
     .work-link:hover {
       transform: translateY(-2px);
-      background: rgba(201, 255, 63, 0.06);
+      background: #0D0F0F;
       border-color: rgba(201, 255, 63, 0.62);
     }
 
@@ -652,8 +639,8 @@
     .software-panel {
       margin-top: 18px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.025);
+      border-radius: 2px;
+      background: #0D0F0F;
       padding: 18px;
       display: grid;
       grid-template-columns: 180px 1fr;
@@ -679,10 +666,10 @@
       width: 58px;
       height: 58px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 2px;
       display: grid;
       place-items: center;
-      background: rgba(255, 255, 255, 0.035);
+      background: #0D0F0F;
       color: var(--text);
       transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
       position: relative;
@@ -694,7 +681,7 @@
       transform: translateY(-2px);
       border-color: rgba(201, 255, 63, 0.45);
       color: var(--acid);
-      background: rgba(201, 255, 63, 0.04);
+      background: #0D0F0F;
     }
 
     .software-item.is-highlighted {
@@ -734,10 +721,9 @@
 
     .contact-panel {
       border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
+      border-radius: 2px;
       background:
-        linear-gradient(135deg, rgba(201, 255, 63, 0.12), transparent 36%),
-        rgba(255, 255, 255, 0.04);
+        #0D0F0F;
       padding: clamp(28px, 5vw, 56px);
       display: grid;
       grid-template-columns: 1fr 0.75fr;
@@ -863,10 +849,9 @@
       inset: 0;
 
       background:
-        rgba(5, 7, 7, 0.88);
+        #0D0F0F;
 
-      backdrop-filter:
-        blur(12px);
+      backdrop-filter: none;
     }
 
 
@@ -888,11 +873,10 @@
       border:
         1px solid var(--line);
 
-      border-radius:
-        var(--radius-lg);
+      border-radius: 2px;
 
       background:
-        rgba(13, 15, 15, 0.98);
+        #0D0F0F;
 
       box-shadow:
         0 40px 120px
@@ -1002,19 +986,19 @@
         clamp(20px, 4vw, 54px);
 
       background:
-        rgba(255, 255, 255, 0.02);
+        #0D0F0F;
 
       overflow: hidden;
     }
 
 
     .lightbox[data-gallery="presentation-01"] .lightbox-media {
-      border-radius: var(--radius-md);
+      border-radius: 2px;
     }
 
 
     .lightbox[data-gallery="presentation-01"] .lightbox-image {
-      border-radius: var(--radius-md);
+      border-radius: 2px;
     }
 
 
@@ -1034,11 +1018,11 @@
     }
 
     .lightbox-media:has(.lightbox-video:not([hidden])) {
-      border-radius: 18px;
+      border-radius: 2px;
     }
 
     .lightbox-video {
-      border-radius: 18px;
+      border-radius: 2px;
       overflow: hidden;
       width: 100%;
       max-height: calc(100vh - 180px);
@@ -1417,7 +1401,8 @@
   .brand--more { justify-self: start; }
 }
 </style>
-<style>.logo-mark{border:0!important;border-radius:0!important;box-shadow:none!important;background:none!important}.logo-mark svg{display:block;width:100%;height:100%}</style>
+<style>.logo-mark{border:0!important;border-radius: 0!important;box-shadow:none!important;background:none!important}.logo-mark svg{display:block;width:100%;height:100%}</style>
+<style>html,body{background:#0D0F0F}.page-grid{display:none}</style>
 </head>
 <body>
   <div class="page-grid"></div>
