@@ -1469,6 +1469,7 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
 .service-card-content h3,.work-content h3,.summary-card h3 { font-size:20px; margin:0 0 12px; }
 .service-card-content p,.work-content p,.summary-card p { font-size:16px; line-height:1.5; margin:0; }
 </style>
+<style>.work-card { cursor: pointer; } .works-slider.is-dragging .work-card { cursor: grabbing; }</style>
 </head>
 <body>
   <div class="page-grid"></div>
@@ -2428,6 +2429,15 @@ h1,h2,h3,h4,h5,h6 { font-family:"Roboto Condensed", "Arial Narrow", sans-serif !
           event.stopPropagation();
         }
       }, true);
+
+      // Delegate clicks from the non-interactive parts of original and cloned cards.
+      worksSlider.addEventListener('click', (event) => {
+        if (event.defaultPrevented || event.target.closest('a, button, input, select, textarea, [role="button"]')) return;
+        const card = event.target.closest('.work-card');
+        if (!card || !worksSlider.contains(card)) return;
+        const action = card.querySelector('.work-link');
+        if (action) action.click();
+      });
     }
   </script>
 
