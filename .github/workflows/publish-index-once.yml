@@ -1,0 +1,39 @@
+name: Publish portfolio index once
+on:
+  push:
+    paths:
+      - .github/workflows/publish-index-once.yml
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare index
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("index.html")
+          text = p.read_text(encoding="utf-8")
+          text = text.replace("https://gr-design.site/#cases", "index.html#cases")
+          text = text.replace('href="/favicon.svg"', 'href="favicon.svg"')
+          p.write_text(text, encoding="utf-8")
+          PY
+      - name: Install Yandex Cloud CLI
+        run: |
+          curl --fail --silent --show-error --location https://storage.yandexcloud.net/yandexcloud-yc/install.sh -o "$RUNNER_TEMP/install-yc.sh"
+          bash "$RUNNER_TEMP/install-yc.sh" -i "$RUNNER_TEMP/yandex-cloud" -n
+          echo "$RUNNER_TEMP/yandex-cloud/bin" >> "$GITHUB_PATH"
+      - name: Upload index
+        env:
+          PORTFOLIO_SERVICE_ACCOUNT_ID: aje9qe0srkurbp2559s9
+        run: |
+          set -euo pipefail
+          oidc=$(curl --fail --silent --show-error -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https%3A%2F%2Fgithub.com%2Flight-lad" | jq -er '.value')
+          echo "::add-mask::$oidc"
+          token=$(curl --fail --silent --show-error https://auth.yandex.cloud/oauth/token --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' --data-urlencode 'requested_token_type=urn:ietf:params:oauth:token-type:access_token' --data-urlencode "audience=$PORTFOLIO_SERVICE_ACCOUNT_ID" --data-urlencode "subject_token=$oidc" --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:id_token' | jq -er '.access_token')
+          echo "::add-mask::$token"
+          export YC_IAM_TOKEN="$token"
+          yc storage s3 cp index.html s3://gr-design.site/index.html --content-type 'text/html; charset=utf-8'
